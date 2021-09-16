@@ -1,0 +1,8 @@
+{
+  "name": "nav-generator-template-1.0.0",
+  "short_name": "nav-generator-template-1.0.0",
+  "lang": "en-US",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#0d1117"
+}

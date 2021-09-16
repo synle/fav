@@ -1,0 +1,20 @@
+{
+  "name": "nav-generator-template",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Nav Generator Template",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "build": "sh build.sh",
+    "format": "sh format.sh",
+    "test": "npx http-server --cors .",
+    "start": "npx http-server --cors ."
+  },
+  "keywords": [
+    "Sy",
+    "Le"
+  ],
+  "author": "Sy Le",
+  "license": "ISC"
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!--  html -->
+  <head>
+    <title>Loading...</title>
+    <link rel="stylesheet" href="https://synle.github.io/nav-generator/index.css" />
+    <link rel="manifest" href="manifest.json" />
+  </head>
+  <body>
+    <load></load>
+  </body>
+  <script>
+    // hooking up service worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw-fav.js', {
+        scope: '.',
+      });
+    }
+
+    // this flag will stop the nav-generator
+    // rendering as new nav and wait for data
+    window.hasCustomNavBeforeLoad = true;
+  </script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script
+    src="https://synle.github.io/nav-generator/index.jsx"
+    type="text/babel"
+    data-presets="react"
+    data-type="module"></script>
+  <script src="index.js"></script>
+</html>
