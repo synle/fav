@@ -1,8 +1,8 @@
 {
-  "name": "nav-generator-template",
-  "version": "1.0.0",
+  "name": "synle-fav",
+  "version": "1.0.1",
   "private": true,
-  "description": "Nav Generator Template",
+  "description": "synle-fav",
   "dependencies": {},
   "devDependencies": {},
   "scripts": {

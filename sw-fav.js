@@ -1,6 +1,9 @@
-const CACHE_NAME = 'nav-generator-template-1.0.1';
+const CACHE_NAME = 'synle-fav-1.0.1';
 
-const dynamicUrlsToCache = [];
+const dynamicUrlsToCache = [
+  'index.js',
+  'https://raw.githubusercontent.com/synle/bashrc/master/software/metadata/ip-address.config',
+];
 
 const staticUrlsToCache = [
   // fav
