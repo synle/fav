@@ -53,16 +53,10 @@ document.addEventListener('NavBeforeLoad', async (e) => {
   @ 🧑
 
   # stock
-  //webull | webull.com/quote
-  //seeking alpha | seekingalpha.com
-  //motley fool | fool.com
-  //cnbc stocklist | cnbc.com/watchlist/#!/watchlist/1958898
   google finance stocklist | google.com/finance/portfolio/watchlist
   yahoo finance | finance.yahoo.com
   market watch | marketwatch.com
   cnbc | cnbc.com
-  //wallstreet bets | reddit.com/r/wallstreetbets
-  //thetagang | reddit.com/r/thetagang
   nasdaq | nasdaq.com
   zacks | zacks.com
 
@@ -82,8 +76,6 @@ document.addEventListener('NavBeforeLoad', async (e) => {
   woot | woot.com
   slickdeals | slickdeals.net
   dealnews | dealnews.com
-  //reddit misc deals | reddit.com/r/deals
-  //reddit laptop deals | reddit.com/r/LaptopDeals/new
 
   # movies
   plex | app.plex.tv
