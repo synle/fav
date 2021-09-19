@@ -93,7 +93,7 @@ document.addEventListener('NavBeforeLoad', async (e) => {
 
   # utils and misc
   ip location | whatismyipaddress.com
-  bashrc | /app/setup-bash-profile.html
+  bashrc | /bashrc/
   port forwarding | /app/port-forwarding.html
   fix link | /app/fix-link.html
   nav bookmark generator ||| synle.github.io/nav-generator/index.html?newNav
