@@ -113,35 +113,13 @@ document.addEventListener('NavBeforeLoad', async (e) => {
   async function getHostMappingSchema() {
     let HOST_MAPPING_BLOCK_SCHEMA = '';
     try {
-      const hostMappingApiResponse = fetch(
-        `https://raw.githubusercontent.com/synle/bashrc/master/software/metadata/ip-address.config`,
+      const HOSTNAMES_GROUPED_BY_ID = await fetch(
+        `https://raw.githubusercontent.com/synle/bashrc/master/software/metadata/ip-address.config.hostnamesGroupedByID`,
       ).then((r) => r.text());
-      const HOSTNAMES_GROUPED_BY_ID = await hostMappingApiResponse.then((r) =>
-        r
-          .split('\n')
-          .filter((s) => !!s.trim() && s.indexOf('=') !== 0)
-          .map((s) => {
-            const [hostIp, ...hostNames] = s
-              .split(/[\:,]/gi)
-              .map((s) => s.trim())
-              .filter((s) => s);
-            return `${hostIp}\n${hostNames.join('\n')}\n`;
-          })
-          .join('\n'),
-      );
-      const HOSTNAMES_MAPPINGS = await hostMappingApiResponse.then((r) =>
-        r
-          .split('\n')
-          .filter((s) => !!s.trim() && s.indexOf('=') !== 0)
-          .map((s) => {
-            const [hostIp, ...hostNames] = s
-              .split(/[\:,]/gi)
-              .map((s) => s.trim())
-              .filter((s) => s);
-            return hostNames.map((hostName) => `${hostIp} ${hostName}`).join('\n');
-          })
-          .join('\n'),
-      );
+      const HOSTNAMES_MAPPINGS = await fetch(
+        `https://raw.githubusercontent.com/synle/bashrc/master/software/metadata/ip-address.config.etcHostnamesMappings`,
+      ).then((r) => r.text());
+      
       HOST_MAPPING_BLOCK_SCHEMA = `
       # Host Mappings
       Host Mapping Ip Config|https://github.com/synle/bashrc/blob/master/software/metadata/ip-address.config
