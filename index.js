@@ -95,7 +95,7 @@ document.addEventListener('NavBeforeLoad', async (e) => {
   ip location | whatismyipaddress.com
   bashrc | /bashrc/
   port forwarding | /app/port-forwarding.html
-  fix link | /app/fix-link.html
+  fix link | /fix-tracking-link/
   nav bookmark generator ||| synle.github.io/nav-generator/index.html?newNav
   prettier playground | prettier.io/playground
   home router config | 192.168.1.1
@@ -119,7 +119,7 @@ document.addEventListener('NavBeforeLoad', async (e) => {
       const HOSTNAMES_MAPPINGS = await fetch(
         `https://raw.githubusercontent.com/synle/bashrc/master/software/metadata/ip-address.config.etcHostnamesMappings`,
       ).then((r) => r.text());
-      
+
       HOST_MAPPING_BLOCK_SCHEMA = `
       # Host Mappings
       Host Mapping Ip Config|https://github.com/synle/bashrc/blob/master/software/metadata/ip-address.config

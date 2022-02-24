@@ -8,7 +8,6 @@
   "scripts": {
     "build": "sh build.sh",
     "format": "sh format.sh",
-    "test": "npx http-server --cors .",
     "start": "npx http-server --cors ."
   },
   "keywords": [
