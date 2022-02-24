@@ -1,4 +1,4 @@
-const CACHE_NAME = 'synle-fav-1.0.4-1645725223353';
+const CACHE_NAME = 'synle-fav-1.0.1645728709209';
 
 const dynamicUrlsToCache = [
   'index.js',
@@ -113,7 +113,7 @@ self.addEventListener('fetch', function (event) {
 });
 
 function _shouldCacheThisUrl(url) {
-  if(url.includes('chrome-extension://')){
+  if (url.includes('chrome-extension://')) {
     return false;
   }
 
@@ -125,7 +125,7 @@ function _shouldCacheThisUrl(url) {
     return true;
   }
 
-  if(url[url.length - 1] === '/'){
+  if (url[url.length - 1] === '/') {
     // used to cache the index
     return true;
   }
