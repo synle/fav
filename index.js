@@ -100,7 +100,8 @@ document.addEventListener('NavBeforeLoad', async (e) => {
   prettier playground | prettier.io/playground
   home router config | 192.168.1.1
   torrent | bit.ly/3pVvM2N
-  Strong Password | javascript://getStrongPassword()
+  strong password | javascript://getStrongPassword()
+  kids letter tracing | synle.github.io/letter-tracing-generator/
 
   # source code
   fav source | github.com/synle/fav
