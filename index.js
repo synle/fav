@@ -20,7 +20,7 @@ function getStrongPassword() {
       -=
       @#$%^&*()+
       [],./
-      {}|<>?"
+      {}|<>?
     `.replace(/[ \n\t]/g, '');
   }
 
