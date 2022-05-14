@@ -5,30 +5,49 @@ function getStrongPassword() {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  function _getLetters() {
-    const chars = [
-      ...new Set(
-        `
-            ABCDEFGHJKMNPQRSTUVWXYZ
-            abcdefghjkmnpqrstuvwxyz
-            234567890-=
-            @#$%^&*()+
-            [];',./
-            {}|:"<>?"
-        `.replace(/[ \n\t]/g, ''),
-      ),
-    ];
-    return chars;
+  function _getUpperCase() {
+    return `
+      ABCDEFGHJKMNPQRSTUVWXYZ
+    `.replace(/[ \n\t]/g, '');
   }
 
-  function getPassword(minLength = 20) {
-    let passwordLength = minLength;
+  function _getLowerCase() {
+    return _getUpperCase().toLowerCase();
+  }
+
+  function _getSpecialChars() {
+    return `
+      -=
+      @#$%^&*()+
+      [],./
+      {}|<>?
+    `.replace(/[ \n\t]/g, '');
+  }
+
+  function _getNumbers() {
+    return `
+      234567890
+    `.replace(/[ \n\t]/g, '');
+  }
+
+  function _getRandomOption(choices) {
+    return choices[_getRandomInt(0, choices.length)] || '';
+  }
+
+  function _getPassword(minLength = 20) {
     let password = '';
-    const letters = _getLetters();
-    while (passwordLength > 0) {
-      passwordLength--;
+    const choices = [
+      ...new Set([..._getUpperCase(), ..._getLowerCase(), ..._getSpecialChars(), ..._getNumbers()]),
+    ];
+
+    password += _getRandomOption(_getUpperCase());
+    password += _getRandomOption(_getLowerCase());
+    password += _getRandomOption(_getSpecialChars());
+    password += _getRandomOption(_getNumbers());
+
+    while (password.length < minLength) {
       try {
-        password += letters[_getRandomInt(0, letters.length)] || '';
+        password += _getRandomOption(choices);
       } catch (err) {}
     }
     return password;
@@ -36,7 +55,7 @@ function getStrongPassword() {
 
   // dispatch event to copy text to clipboard
   const eventAppCopyTextToClipboard = new Event('AppCopyTextToClipboard');
-  eventAppCopyTextToClipboard.text = getPassword();
+  eventAppCopyTextToClipboard.text = _getPassword();
   document.dispatchEvent(eventAppCopyTextToClipboard);
 }
 
