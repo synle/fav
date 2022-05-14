@@ -30,18 +30,15 @@ function getStrongPassword() {
     `.replace(/[ \n\t]/g, '');
   }
 
-  function _getRandomOption(choices){
+  function _getRandomOption(choices) {
     return choices[_getRandomInt(0, choices.length)] || '';
   }
-  
+
   function _getPassword(minLength = 20) {
     let password = '';
-    const choices = [...new Set([
-      ..._getUpperCase(),
-      ..._getLowerCase(),
-      ..._getSpecialChars(),
-      ..._getNumbers(),
-    ])];
+    const choices = [
+      ...new Set([..._getUpperCase(), ..._getLowerCase(), ..._getSpecialChars(), ..._getNumbers()]),
+    ];
 
     password += _getRandomOption(_getUpperCase());
     password += _getRandomOption(_getLowerCase());
