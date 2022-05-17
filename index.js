@@ -1,4 +1,4 @@
-function getStrongPassword() {
+function getStrongPassword(isAlphaNumericOnly = false) {
   function _getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -36,14 +36,20 @@ function getStrongPassword() {
 
   function _getPassword(minLength = 20) {
     let password = '';
-    const choices = [
-      ...new Set([..._getUpperCase(), ..._getLowerCase(), ..._getSpecialChars(), ..._getNumbers()]),
-    ];
+    let choices = [..._getNumbers(), ..._getLowerCase()];
 
-    password += _getRandomOption(_getUpperCase());
-    password += _getRandomOption(_getLowerCase());
-    password += _getRandomOption(_getSpecialChars());
-    password += _getRandomOption(_getNumbers());
+    if (isAlphaNumericOnly === false) {
+      password += _getRandomOption(_getUpperCase());
+      password += _getRandomOption(_getLowerCase());
+      password += _getRandomOption(_getSpecialChars());
+      password += _getRandomOption(_getNumbers());
+
+      choices = [...choices, ..._getUpperCase(), ..._getSpecialChars()];
+    } else {
+      password += _getRandomOption(_getLowerCase());
+    }
+
+    choices = [...new Set(...choices)];
 
     while (password.length < minLength) {
       try {
@@ -120,6 +126,7 @@ document.addEventListener('NavBeforeLoad', async (e) => {
   home router config | 192.168.1.1
   torrent | bit.ly/3pVvM2N
   strong password | javascript://getStrongPassword()
+  alpha numeric generator | javascript://getStrongPassword(true)
   kids letter tracing | synle.github.io/letter-tracing-generator/
 
   # source code
