@@ -37,21 +37,19 @@ function getStrongPassword(isAlphaNumericOnly = false) {
   function _getPassword(minLength = 20) {
     let password = '';
     let choices = [..._getNumbers(), ..._getLowerCase()];
-    
-    if(isAlphaNumericOnly === false){
+
+    if (isAlphaNumericOnly === false) {
       password += _getRandomOption(_getUpperCase());
       password += _getRandomOption(_getLowerCase());
       password += _getRandomOption(_getSpecialChars());
       password += _getRandomOption(_getNumbers());
-      
-      choices = [
-         ...choices, ..._getUpperCase(), ..._getSpecialChars()
-      ];
+
+      choices = [...choices, ..._getUpperCase(), ..._getSpecialChars()];
     } else {
       password += _getRandomOption(_getLowerCase());
     }
-    
-    choices = [... new Set(...choices)];
+
+    choices = [...new Set(...choices)];
 
     while (password.length < minLength) {
       try {
