@@ -1,8 +1,12 @@
-name: main-build
+name: build-main
 
 on:
   push:
     branches: [master, main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
