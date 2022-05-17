@@ -49,7 +49,7 @@ function getStrongPassword(isAlphaNumericOnly = false) {
       password += _getRandomOption(_getLowerCase());
     }
 
-    choices = [...new Set(...choices)];
+    choices = [...new Set(choices)];
 
     while (password.length < minLength) {
       try {
