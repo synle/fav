@@ -142,10 +142,10 @@ document.addEventListener('NavBeforeLoad', async (e) => {
 
   async function getHostMappingSchema() {
     let HOST_MAPPING_BLOCK_SCHEMA = '';
-    
+
     const ETC_HOST_PATH_WIN32 = `c:\\Windows\\System32\\Drivers\\etc\\hosts`;
     const ETC_HOST_PATH_OSX = `/etc/hosts`;
-    
+
     try {
       const HOSTNAMES_GROUPED_BY_ID = await fetch(
         `https://raw.githubusercontent.com/synle/bashrc/master/software/metadata/ip-address.config.hostnamesGroupedByID`,
