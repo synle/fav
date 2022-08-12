@@ -94,6 +94,7 @@ document.addEventListener('NavBeforeLoad', async (e) => {
   tech crunch | techcrunch.com
   hacker news | hn.svelte.dev/top/1
   echojs | echojs.com
+  blind | www.teamblind.com
 
   # shopping and deals
   amazon | amazon.com
@@ -105,15 +106,17 @@ document.addEventListener('NavBeforeLoad', async (e) => {
   # movies
   plex | app.plex.tv
   netflix | netflix.com
-  disney +| disneyplus.com
+  disney+ | disneyplus.com
   prime video | amazon.com/gp/video
   youtube | youtube.com
 
   # personal
   synle | /
-  github repositories | github.com/synle?tab=repositories
   email | mail.google.com/mail
   calendar | calendar.google.com/calendar
+  
+  # dev
+  github repositories | github.com/synle?tab=repositories
   code spaces | github.com/codespaces
 
   # utils and misc
@@ -139,6 +142,10 @@ document.addEventListener('NavBeforeLoad', async (e) => {
 
   async function getHostMappingSchema() {
     let HOST_MAPPING_BLOCK_SCHEMA = '';
+    
+    const ETC_HOST_PATH_WIN32 = `c:\\Windows\\System32\\Drivers\\etc\\hosts`;
+    const ETC_HOST_PATH_OSX = `/etc/hosts`;
+    
     try {
       const HOSTNAMES_GROUPED_BY_ID = await fetch(
         `https://raw.githubusercontent.com/synle/bashrc/master/software/metadata/ip-address.config.hostnamesGroupedByID`,
@@ -153,10 +160,10 @@ document.addEventListener('NavBeforeLoad', async (e) => {
       >>> Host Files Location|tabHostDir >>> Host IPs|tabHostNamesGroupedByIp >>> /etc/hosts Mapping|tabHostMappings
       \`\`\`tabHostDir
       # Windows
-      c:\\Windows\\System32\\Drivers\\etc\\hosts
+      ${ETC_HOST_PATH_WIN32}
 
       # Linux
-      sudo vim /etc/hosts
+      ${ETC_HOST_PATH_OSX}
       \`\`\`
 
       \`\`\`tabHostNamesGroupedByIp
@@ -164,6 +171,8 @@ document.addEventListener('NavBeforeLoad', async (e) => {
       \`\`\`
 
       \`\`\`tabHostMappings
+      # subl ${ETC_HOST_PATH_WIN32}
+      # sudo vim ${ETC_HOST_PATH_OSX}
       # Sy Home Hosts
       ${HOSTNAMES_MAPPINGS}
       # END Sy Home Hosts
