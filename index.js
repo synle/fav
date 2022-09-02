@@ -129,7 +129,7 @@ document.addEventListener('NavBeforeLoad', async (e) => {
   home router config | 192.168.1.1
   torrent | bit.ly/3pVvM2N
   strong password | javascript://getStrongPassword()
-  alpha numeric generator | javascript://getStrongPassword(true)
+  alpha numeric password | javascript://getStrongPassword(true)
   kids letter tracing | synle.github.io/letter-tracing-generator/
 
   # source code
