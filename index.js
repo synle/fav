@@ -131,6 +131,7 @@ document.addEventListener('NavBeforeLoad', async (e) => {
   strong password | javascript://getStrongPassword()
   alpha numeric password | javascript://getStrongPassword(true)
   kids letter tracing | synle.github.io/letter-tracing-generator/
+  kids first 100 words | synle.github.io/letter-tracing-generator/first-grade-100-words.html
 
   # source code
   fav source | github.com/synle/fav
