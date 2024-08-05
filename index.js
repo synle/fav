@@ -130,6 +130,11 @@ document.addEventListener('NavBeforeLoad', async (e) => {
   torrent | bit.ly/3pVvM2N
   strong password | javascript://getStrongPassword()
   alpha numeric password | javascript://getStrongPassword(true)
+  Multi Factor Auth (MFA) | synle.tplinkdns.com
+  jupyter lab Notebook | localhost:8888
+  Jellyfin Host | 192.168.1.22:8096
+
+  # kid
   kids letter tracing | synle.github.io/letter-tracing-generator/
   kids first 100 words | synle.github.io/letter-tracing-generator/first-grade-100-words.html
 
