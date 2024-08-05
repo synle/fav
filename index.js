@@ -78,10 +78,10 @@ document.addEventListener('NavBeforeLoad', async (e) => {
   @ 🧑
 
   # stock
+  cnbc | cnbc.com
   google finance stocklist | google.com/finance/portfolio/watchlist
   yahoo finance | finance.yahoo.com
   market watch | marketwatch.com
-  cnbc | cnbc.com
   nasdaq | nasdaq.com
   zacks | zacks.com
 
@@ -89,26 +89,29 @@ document.addEventListener('NavBeforeLoad', async (e) => {
   google news | news.google.com/topstories
   nbc bay area | nbcbayarea.com
   lifehacker | lifehacker.com
+
+  # tech news
+  blind | www.teamblind.com
+  hacker news | hn.svelte.dev/top/1
+  echojs | echojs.com
   engadget | engadget.com
   verge | theverge.com
   tech crunch | techcrunch.com
-  hacker news | hn.svelte.dev/top/1
-  echojs | echojs.com
-  blind | www.teamblind.com
+  
 
   # shopping and deals
+  slickdeals | slickdeals.net
+  dealnews | dealnews.com
   amazon | amazon.com
   costco | costco.com
   woot | woot.com
-  slickdeals | slickdeals.net
-  dealnews | dealnews.com
 
   # movies
+  youtube | youtube.com
   plex | app.plex.tv
   netflix | netflix.com
   disney+ | disneyplus.com
   prime video | amazon.com/gp/video
-  youtube | youtube.com
 
   # personal
   synle | /
@@ -130,11 +133,16 @@ document.addEventListener('NavBeforeLoad', async (e) => {
   torrent | bit.ly/3pVvM2N
   strong password | javascript://getStrongPassword()
   alpha numeric password | javascript://getStrongPassword(true)
+  Multi Factor Auth (MFA) | synle.tplinkdns.com
+  jupyter lab Notebook | localhost:8888
+  Jellyfin Host | 192.168.1.22:8096
+
+  # kids
   kids letter tracing | synle.github.io/letter-tracing-generator/
   kids first 100 words | synle.github.io/letter-tracing-generator/first-grade-100-words.html
 
   # source code
-  fav source | github.com/synle/fav
+  fav source code | github.com/synle/fav
   nav generator source | github.com/synle/nav-generator
 `
     .split('\n')
