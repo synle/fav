@@ -78,10 +78,10 @@ document.addEventListener('NavBeforeLoad', async (e) => {
   @ 🧑
 
   # stock
+  cnbc | cnbc.com
   google finance stocklist | google.com/finance/portfolio/watchlist
   yahoo finance | finance.yahoo.com
   market watch | marketwatch.com
-  cnbc | cnbc.com
   nasdaq | nasdaq.com
   zacks | zacks.com
 
@@ -104,11 +104,11 @@ document.addEventListener('NavBeforeLoad', async (e) => {
   dealnews | dealnews.com
 
   # movies
+  youtube | youtube.com
   plex | app.plex.tv
   netflix | netflix.com
   disney+ | disneyplus.com
   prime video | amazon.com/gp/video
-  youtube | youtube.com
 
   # personal
   synle | /
