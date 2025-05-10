@@ -30,7 +30,7 @@ const SITE_SCHEMA = `
   amazon | amazon.com
   costco | costco.com
   woot | woot.com
-  reddit build PC | www.reddit.com/r/buildapcsales/
+  reddit build PC | reddit.com/r/buildapcsales/new/
 
   # movies
   youtube | youtube.com
@@ -68,7 +68,7 @@ const SITE_SCHEMA = `
   kids first 100 words | synle.github.io/letter-tracing-generator/first-grade-100-words.html
 
   # source code
-  edit fav | github.com/synle/fav/edit/main/index.js
+  edit favs | github.com/synle/fav/edit/main/index.js
   nav generator source | github.com/synle/nav-generator
 `
   .split('\n')
