@@ -73,6 +73,7 @@ const SITE_SCHEMA = `
 `
   .split('\n')
   .map((s) => s.trim())
+  .filter((s) => s)
   .join('\n');
 
 function getStrongPassword(isAlphaNumericOnly = false) {
