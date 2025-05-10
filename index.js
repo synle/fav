@@ -1,3 +1,81 @@
+const SITE_SCHEMA = `
+  ! Sy's Favorites
+  @ 🧑
+
+  # stock
+  cnbc | cnbc.com
+  google finance stocklist | google.com/finance/portfolio/watchlist
+  yahoo finance | finance.yahoo.com
+  market watch | marketwatch.com
+  nasdaq | nasdaq.com
+  zacks | zacks.com
+
+  # general news
+  google news | news.google.com/topstories
+  nbc bay area | nbcbayarea.com
+  lifehacker | lifehacker.com
+
+  # tech news
+  blind | www.teamblind.com
+  hacker news | hn.svelte.dev/top/1
+  echojs | echojs.com
+  engadget | engadget.com
+  verge | theverge.com
+  tech crunch | techcrunch.com
+  
+
+  # shopping and deals
+  slickdeals | slickdeals.net
+  dealnews | dealnews.com
+  amazon | amazon.com
+  costco | costco.com
+  woot | woot.com
+  reddit build PC | www.reddit.com/r/buildapcsales/
+
+  # movies
+  youtube | youtube.com
+  plex | app.plex.tv
+  netflix | netflix.com
+  disney+ | disneyplus.com
+  prime video | amazon.com/gp/video
+
+  # personal
+  synle | /
+  email | mail.google.com/mail
+  calendar | calendar.google.com/calendar
+  
+  # dev
+  github repositories | github.com/synle?tab=repositories
+  code spaces | github.com/codespaces
+
+  # utils and misc
+  ip location | whatismyipaddress.com
+  bashrc | /bashrc/
+  port forwarding | /app/port-forwarding.html
+  fix link | /fix-tracking-link/
+  nav bookmark generator ||| synle.github.io/nav-generator/index.html?newNav
+  prettier playground | prettier.io/playground
+  home router config | 192.168.1.1
+  torrent | bit.ly/3pVvM2N
+  strong password | javascript://getStrongPassword()
+  alpha numeric password | javascript://getStrongPassword(true)
+  Multi Factor Auth (MFA) | synle.tplinkdns.com
+  jupyter lab Notebook | localhost:8888
+  Jellyfin Host | 192.168.1.22:8096
+
+  # kids
+  kids letter tracing | synle.github.io/letter-tracing-generator/
+  kids first 100 words | synle.github.io/letter-tracing-generator/first-grade-100-words.html
+
+  # source code
+  edit fav | github.com/synle/fav/edit/main/index.js
+  nav generator source | github.com/synle/nav-generator
+`
+  .split('\n')
+  .map((s) => s.trim())
+  .filter((s) => s)
+  .join('\n');
+
 function getStrongPassword(isAlphaNumericOnly = false) {
   function _getRandomInt(min, max) {
     min = Math.ceil(min);
@@ -72,82 +150,6 @@ document.addEventListener('NavBeforeLoad', async (e) => {
   if (!renderSchema) {
     return;
   }
-
-  const SITE_SCHEMA = `
-  ! Sy's Favorites
-  @ 🧑
-
-  # stock
-  cnbc | cnbc.com
-  google finance stocklist | google.com/finance/portfolio/watchlist
-  yahoo finance | finance.yahoo.com
-  market watch | marketwatch.com
-  nasdaq | nasdaq.com
-  zacks | zacks.com
-
-  # general news
-  google news | news.google.com/topstories
-  nbc bay area | nbcbayarea.com
-  lifehacker | lifehacker.com
-
-  # tech news
-  blind | www.teamblind.com
-  hacker news | hn.svelte.dev/top/1
-  echojs | echojs.com
-  engadget | engadget.com
-  verge | theverge.com
-  tech crunch | techcrunch.com
-  
-
-  # shopping and deals
-  slickdeals | slickdeals.net
-  dealnews | dealnews.com
-  amazon | amazon.com
-  costco | costco.com
-  woot | woot.com
-
-  # movies
-  youtube | youtube.com
-  plex | app.plex.tv
-  netflix | netflix.com
-  disney+ | disneyplus.com
-  prime video | amazon.com/gp/video
-
-  # personal
-  synle | /
-  email | mail.google.com/mail
-  calendar | calendar.google.com/calendar
-  
-  # dev
-  github repositories | github.com/synle?tab=repositories
-  code spaces | github.com/codespaces
-
-  # utils and misc
-  ip location | whatismyipaddress.com
-  bashrc | /bashrc/
-  port forwarding | /app/port-forwarding.html
-  fix link | /fix-tracking-link/
-  nav bookmark generator ||| synle.github.io/nav-generator/index.html?newNav
-  prettier playground | prettier.io/playground
-  home router config | 192.168.1.1
-  torrent | bit.ly/3pVvM2N
-  strong password | javascript://getStrongPassword()
-  alpha numeric password | javascript://getStrongPassword(true)
-  Multi Factor Auth (MFA) | synle.tplinkdns.com
-  jupyter lab Notebook | localhost:8888
-  Jellyfin Host | 192.168.1.22:8096
-
-  # kids
-  kids letter tracing | synle.github.io/letter-tracing-generator/
-  kids first 100 words | synle.github.io/letter-tracing-generator/first-grade-100-words.html
-
-  # source code
-  fav source code | github.com/synle/fav
-  nav generator source | github.com/synle/nav-generator
-`
-    .split('\n')
-    .map((s) => s.trim())
-    .join('\n');
 
   async function getHostMappingSchema() {
     let HOST_MAPPING_BLOCK_SCHEMA = '';
