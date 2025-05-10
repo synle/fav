@@ -71,9 +71,9 @@ const SITE_SCHEMA = `
   edit fav | github.com/synle/fav/edit/main/index.js
   nav generator source | github.com/synle/nav-generator
 `
-    .split('\n')
-    .map((s) => s.trim())
-    .join('\n');
+  .split('\n')
+  .map((s) => s.trim())
+  .join('\n');
 
 function getStrongPassword(isAlphaNumericOnly = false) {
   function _getRandomInt(min, max) {
