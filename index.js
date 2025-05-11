@@ -68,8 +68,8 @@ const SITE_SCHEMA = `
   kids first 100 words | synle.github.io/letter-tracing-generator/first-grade-100-words.html
 
   # source code
-  edit favs code | github.com/synle/fav/edit/main/index.js
-  edit favs base code | github.com/synle/nav-generator
+  edit nav favs | github.com/synle/fav/edit/main/index.js
+  edit nav library | github.com/synle/nav-generator
 `
   .split('\n')
   .map((s) => s.trim())
