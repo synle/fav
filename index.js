@@ -68,8 +68,8 @@ const SITE_SCHEMA = `
   kids first 100 words | synle.github.io/letter-tracing-generator/first-grade-100-words.html
 
   # source code
-  edit favs | github.com/synle/fav/edit/main/index.js
-  nav generator source | github.com/synle/nav-generator
+  edit nav favs | github.com/synle/fav/edit/main/index.js
+  edit nav library | github.com/synle/nav-generator
 `
   .split('\n')
   .map((s) => s.trim())
@@ -166,7 +166,6 @@ document.addEventListener('NavBeforeLoad', async (e) => {
       ).then((r) => r.text());
 
       HOST_MAPPING_BLOCK_SCHEMA = `
-      # Host Mappings
       Host Mapping Ip Config|https://github.com/synle/bashrc/blob/master/software/metadata/ip-address.config
       >>> Host Files Location|tabHostDir >>> Host IPs|tabHostNamesGroupedByIp >>> /etc/hosts Mapping|tabHostMappings
       \`\`\`tabHostDir
