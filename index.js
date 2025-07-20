@@ -30,7 +30,8 @@ const SITE_SCHEMA = `
   amazon | amazon.com
   costco | costco.com
   woot | woot.com
-  reddit build PC | reddit.com/r/buildapcsales/new/
+  reddit build PC | reddit.com/r/buildapcsales/new
+  microcenter | microcenter.com
 
   # movies
   youtube | youtube.com
