@@ -41,13 +41,19 @@ const SITE_SCHEMA = `
   disney+ | disneyplus.com
   prime video | amazon.com/gp/video
 
+  # UT Austin School
+  Canvas | canvas.utexas.edu
+  EDx | edstem.org/us/dashboard
+
+  # social media
+  linkedin | linkedin.com
+  facebook | facebook.com
+  discord | discord.com
+
   # personal
   synle | /
   email | mail.google.com/mail
   calendar | calendar.google.com/calendar
-
-  # school
-  UT Austin Canvas | canvas.utexas.edu
   
   # dev
   github repositories | github.com/synle?tab=repositories
