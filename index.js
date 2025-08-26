@@ -41,6 +41,15 @@ const SITE_SCHEMA = `
   disney+ | disneyplus.com
   prime video | amazon.com/gp/video
 
+  # UT Austin School
+  Canvas | canvas.utexas.edu
+  EDx | edstem.org/us/dashboard
+
+  # social media
+  linkedin | linkedin.com
+  facebook | facebook.com
+  discord | discord.com
+
   # personal
   synle | /
   email | mail.google.com/mail
@@ -72,11 +81,93 @@ const SITE_SCHEMA = `
   # source code
   edit nav favs | github.com/synle/fav/edit/main/index.js
   edit nav library | github.com/synle/nav-generator
-`
-  .split('\n')
-  .map((s) => s.trim())
-  .filter((s) => s)
-  .join('\n');
+`;
+
+const URL_PORTER_NOTES = `
+>>>URL Porter Download|tabUrlPorterDownload>>>URL Porter MetaData|tabUrlPorterMetaData
+
+\`\`\`tabUrlPorterDownload
+wget https://github.com/synle/url-porter/raw/refs/heads/main/url-porter.zip
+unzip url-porter.zip
+\`\`\`
+
+\`\`\`tabUrlPorterMetaData
+[
+  {
+    "from": "||drive^",
+    "to": "https://drive.google.com"
+  },
+  {
+    "from": "||gmail^",
+    "to": "https://mail.google.com/mail/u/0/#inbox"
+  },
+  {
+    "from": "||outlook^",
+    "to": "https://outlook.office.com"
+  },
+  {
+    "from": "||plex^",
+    "to": "http://192.168.1.22:32400/web/index.html#!"
+  },
+  {
+    "from": "||mfa^",
+    "to": "https://192.168.1.22"
+  },
+  {
+    "from": "||vs^",
+    "to": "http://synle.tplinkdns.com:8080"
+  },
+  {
+    "from": "||jf^",
+    "to": "http://192.168.1.22:8096"
+  },
+  {
+    "from": "||jellyfin^",
+    "to": "http://jf"
+  },
+  {
+    "from": "||edx^",
+    "to": "https://edstem.org/us/dashboard"
+  },
+  {
+    "from": "||canvas^",
+    "to": "https://utexas.instructure.com"
+  },
+  {
+    "from": "||wagework^",
+    "to": "https://participant.wageworks.com"
+  },
+  {
+    "from": "||hn^",
+    "to": "https://news.ycombinator.com"
+  },
+  {
+    "from": "||chat^",
+    "to": "https://chatgpt.com"
+  },
+  {
+    "from": "||gpt^",
+    "to": "https://chatgpt.com"
+  },
+  {
+    "from": "||keep^",
+    "to": "https://keep.google.com/#home"
+  },
+  {
+    "from": "||zillow^",
+    "to": "https://www.zillow.com"
+  }
+]
+\`\`\`
+`;
+
+function _transformSchema(s) {
+  return s
+    .split('\n')
+    .map((s) => s.trim())
+    .filter((s) => s)
+    .join('\n');
+}
 
 function getStrongPassword(isAlphaNumericOnly = false) {
   function _getRandomInt(min, max) {
@@ -200,7 +291,8 @@ document.addEventListener('NavBeforeLoad', async (e) => {
 
   // construct and save the data to cache.
   renderSchema(`
-    ${SITE_SCHEMA}
+    ${_transformSchema(SITE_SCHEMA)}
     ${await getHostMappingSchema()}
+    ${_transformSchema(URL_PORTER_NOTES)}
   `);
 });
