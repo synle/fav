@@ -45,6 +45,9 @@ const SITE_SCHEMA = `
   synle | /
   email | mail.google.com/mail
   calendar | calendar.google.com/calendar
+
+  # school
+  UT Austin Canvas | canvas.utexas.edu
   
   # dev
   github repositories | github.com/synle?tab=repositories
