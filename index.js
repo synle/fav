@@ -35,7 +35,8 @@ const SITE_SCHEMA = `
 
   # movies
   youtube | youtube.com
-  plex | app.plex.tv
+  plex app | app.plex.tv
+  plex local | 192.168.1.22:32400
   netflix | netflix.com
   disney+ | disneyplus.com
   prime video | amazon.com/gp/video
