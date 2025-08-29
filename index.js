@@ -81,7 +81,7 @@ const SITE_SCHEMA = `
   # source code
   edit nav favs | github.com/synle/fav/edit/main/index.js
   edit nav library | github.com/synle/nav-generator
-`
+`;
 
 const URL_PORTER_NOTES = `
 >>>URL Porter Download|tabUrlPorterDownload>>>URL Porter MetaData|tabUrlPorterMetaData
@@ -159,13 +159,14 @@ unzip url-porter.zip
   }
 ]
 \`\`\`
-` 
+`;
 
-function _transformSchema(s){
-  return s.split('\n')
-  .map((s) => s.trim())
-  .filter((s) => s)
-  .join('\n')
+function _transformSchema(s) {
+  return s
+    .split('\n')
+    .map((s) => s.trim())
+    .filter((s) => s)
+    .join('\n');
 }
 
 function getStrongPassword(isAlphaNumericOnly = false) {
