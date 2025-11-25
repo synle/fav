@@ -79,6 +79,7 @@ const SITE_SCHEMA = `
   kids first 100 words | synle.github.io/letter-tracing-generator/first-grade-100-words.html
 
   # source code
+  edit url porter configs | https://github.com/synle/fav/blob/main/url-porter.json
   edit nav favs | github.com/synle/fav/edit/main/index.js
   edit nav library | github.com/synle/nav-generator
 `;
