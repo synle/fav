@@ -74,91 +74,24 @@ const SITE_SCHEMA = `
   jupyter lab Notebook | localhost:8888
   Jellyfin Host | 192.168.1.22:8096
 
+  # Android
+  vanced | vanced.to/
+  vanced micro g | vanced.to/gmscore-microg
+  vanced google photos| vanced.to/revanced-google-photos
+  vanced YT| vanced.to/revanced-youtube-extended
+  vanced YT Music | vanced.to/revanced-youtube-music-extended
+  vanced Google News | vanced.to/revanced-google-news
+  nova Companion | teslacoilapps.com/tesladirect/download.pl?packageName=com.teslacoilsw.launcherclientproxy&betaType=public
+  
   # kids
   kids letter tracing | synle.github.io/letter-tracing-generator/
   kids first 100 words | synle.github.io/letter-tracing-generator/first-grade-100-words.html
 
+
   # source code
+  edit url porter configs | https://github.com/synle/fav/blob/main/url-porter.json
   edit nav favs | github.com/synle/fav/edit/main/index.js
   edit nav library | github.com/synle/nav-generator
-`;
-
-const URL_PORTER_NOTES = `
->>>URL Porter Download|tabUrlPorterDownload>>>URL Porter MetaData|tabUrlPorterMetaData
-
-\`\`\`tabUrlPorterDownload
-wget https://github.com/synle/url-porter/raw/refs/heads/main/url-porter.zip
-unzip url-porter.zip
-\`\`\`
-
-\`\`\`tabUrlPorterMetaData
-[
-  {
-    "from": "||drive^",
-    "to": "https://drive.google.com"
-  },
-  {
-    "from": "||gmail^",
-    "to": "https://mail.google.com/mail/u/0/#inbox"
-  },
-  {
-    "from": "||outlook^",
-    "to": "https://outlook.office.com"
-  },
-  {
-    "from": "||plex^",
-    "to": "http://192.168.1.22:32400/web/index.html#!"
-  },
-  {
-    "from": "||mfa^",
-    "to": "https://192.168.1.22"
-  },
-  {
-    "from": "||vs^",
-    "to": "http://synle.tplinkdns.com:8080"
-  },
-  {
-    "from": "||jf^",
-    "to": "http://192.168.1.22:8096"
-  },
-  {
-    "from": "||jellyfin^",
-    "to": "http://jf"
-  },
-  {
-    "from": "||edx^",
-    "to": "https://edstem.org/us/dashboard"
-  },
-  {
-    "from": "||canvas^",
-    "to": "https://utexas.instructure.com"
-  },
-  {
-    "from": "||wagework^",
-    "to": "https://participant.wageworks.com"
-  },
-  {
-    "from": "||hn^",
-    "to": "https://news.ycombinator.com"
-  },
-  {
-    "from": "||chat^",
-    "to": "https://chatgpt.com"
-  },
-  {
-    "from": "||gpt^",
-    "to": "https://chatgpt.com"
-  },
-  {
-    "from": "||keep^",
-    "to": "https://keep.google.com/#home"
-  },
-  {
-    "from": "||zillow^",
-    "to": "https://www.zillow.com"
-  }
-]
-\`\`\`
 `;
 
 function _transformSchema(s) {
@@ -167,6 +100,22 @@ function _transformSchema(s) {
     .map((s) => s.trim())
     .filter((s) => s)
     .join('\n');
+}
+
+async function getUrlPorterConfigs() {
+  const url = 'https://synle.github.io/fav/url-porter.json';
+
+  return fetch(url)
+    .then((r) => {
+      if (!r.ok) throw new Error('Failed to fetch remote configs');
+      return r.json();
+    })
+    .then((data) => data.configs ?? [])
+    .catch((err) => {
+      console.error(err);
+      return [];
+    })
+    .then((data) => JSON.stringify(data, null, 2));
 }
 
 function getStrongPassword(isAlphaNumericOnly = false) {
@@ -288,6 +237,23 @@ document.addEventListener('NavBeforeLoad', async (e) => {
 
     return HOST_MAPPING_BLOCK_SCHEMA;
   }
+
+  let URL_PORTER_NOTES = `
+  >>>URL Porter Download|tabUrlPorterDownload>>>URL Porter MetaData|tabUrlPorterMetaData
+  
+  \`\`\`tabUrlPorterDownload
+  # download it
+  wget https://github.com/synle/url-porter/raw/refs/heads/main/url-porter.zip
+  unzip url-porter.zip
+  
+  # config is here
+  # https://github.com/synle/fav/blob/main/url-porter.json
+  \`\`\`
+  
+  \`\`\`tabUrlPorterMetaData
+  ${await getUrlPorterConfigs()}
+  \`\`\`
+  `;
 
   // construct and save the data to cache.
   renderSchema(`

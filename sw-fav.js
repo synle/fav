@@ -1,4 +1,4 @@
-const CACHE_NAME = 'synle-fav-1.0.1756431244646';
+const CACHE_NAME = 'synle-fav-1.0.1769705452848';
 
 const dynamicUrlsToCache = [
   'index.js',
