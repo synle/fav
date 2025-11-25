@@ -249,6 +249,6 @@ document.addEventListener('NavBeforeLoad', async (e) => {
   renderSchema(`
     ${_transformSchema(SITE_SCHEMA)}
     ${await getHostMappingSchema()}
-    ${URL_PORTER_NOTES}
+    ${_transformSchema(URL_PORTER_NOTES)}
   `);
 });
