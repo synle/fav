@@ -105,7 +105,7 @@ async function getUrlPorterConfigs() {
       console.error(err);
       return [];
     })
-    .then((data) => JSON.stringify(data));
+    .then((data) => JSON.stringify(data, null, 2));
 }
 
 function getStrongPassword(isAlphaNumericOnly = false) {
@@ -249,6 +249,6 @@ document.addEventListener('NavBeforeLoad', async (e) => {
   renderSchema(`
     ${_transformSchema(SITE_SCHEMA)}
     ${await getHostMappingSchema()}
-    ${_transformSchema(URL_PORTER_NOTES)}
+    ${URL_PORTER_NOTES}
   `);
 });
