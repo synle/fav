@@ -74,13 +74,15 @@ const SITE_SCHEMA = `
   jupyter lab Notebook | localhost:8888
   Jellyfin Host | 192.168.1.22:8096
 
-  # Android Vanced
+  # Android
   vanced | vanced.to/
   vanced micro g | vanced.to/gmscore-microg
   vanced google photos| vanced.to/revanced-google-photos
   vanced YT| vanced.to/revanced-youtube-extended
   vanced YT Music | vanced.to/revanced-youtube-music-extended
-
+  vanced Google News | vanced.to/revanced-google-news
+  nova Companion | teslacoilapps.com/tesladirect/download.pl?packageName=com.teslacoilsw.launcherclientproxy&betaType=public
+  
   # kids
   kids letter tracing | synle.github.io/letter-tracing-generator/
   kids first 100 words | synle.github.io/letter-tracing-generator/first-grade-100-words.html
