@@ -60,6 +60,14 @@
     {
       "from": "||zillow^",
       "to": "https://www.zillow.com"
+    },
+    {
+      "from": "||tplinkwifi.net^",
+      "to": "192.168.1.1"
+    },
+    {
+      "from": "||googlefi^",
+      "to": "https://fi.google.com/account"
     }
   ]
 }
