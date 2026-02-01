@@ -6,8 +6,10 @@
   "dependencies": {},
   "devDependencies": {},
   "scripts": {
+    "clean": "rm -f index.html import-map.json",
     "build": "sh build.sh",
     "format": "sh format.sh",
+    "dev": "sh dev.sh",
     "start": "npx http-server --cors ."
   },
   "keywords": [
