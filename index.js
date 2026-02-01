@@ -92,6 +92,22 @@ const SITE_SCHEMA = `
   edit url porter configs | https://github.com/synle/fav/blob/main/url-porter.json
   edit nav favs | github.com/synle/fav/edit/main/index.js
   edit nav library | github.com/synle/nav-generator
+
+  # Nav Generator
+  >>>nav-fav|nav-fav>>>nav-generator|nav-generator>>>nav-template|nav-template
+  
+  ---nav-fav
+  git clone git@github.com:synle/fav.git
+  ---
+  
+  ---nav-generator
+  git clone git@github.com:synle/nav-generator.git
+  ---
+  
+  ---nav-template
+  git clone git@github.com:synle/nav-generator-template.git
+  ---
+
 `;
 
 function _transformSchema(s) {

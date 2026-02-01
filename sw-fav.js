@@ -1,4 +1,4 @@
-const CACHE_NAME = 'synle-fav-1.0.1769705452848';
+const CACHE_NAME = 'synle-fav-1.2.1769962876283';
 
 const dynamicUrlsToCache = [
   'index.js',
@@ -18,6 +18,9 @@ const staticUrlsToCache = [
   'https://unpkg.com/@babel/standalone/babel.min.js',
   'https://cdn.skypack.dev/react',
   'https://cdn.skypack.dev/react-dom',
+  'https://unpkg.com/@babel/standalone/babel.min.js',
+  'https://esm.sh',
+  'https://cdn.jsdelivr.net',
 ];
 
 const cacheKeys = [...staticUrlsToCache, ...dynamicUrlsToCache];

@@ -1,31 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-  <!--  html -->
-  <head>
-    <title>Loading...</title>
-    <link rel="stylesheet" href="https://synle.github.io/nav-generator/index.css" />
-    <link rel="manifest" href="manifest.json" />
-  </head>
-  <body>
-    <load></load>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <title>Loading...</title>
+
+  <link rel="stylesheet" href="https://synle.github.io/nav-generator/index.css" />
+  <link rel="manifest" href="manifest.json" />
+
+  <!-- Babel Standalone (pinned) -->
+  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.24.0/babel.min.js"></script>
+
+  <!-- Import maps (pinned) -->
+  <script type="importmap">
+    {
+      "imports": {
+        "react": "https://cdn.jsdelivr.net/npm/react@18.2.0/+esm",
+        "react-dom": "https://cdn.jsdelivr.net/npm/react-dom@18.2.0/+esm"
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <load></load>
+
   <script>
-    // hooking up service worker
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw-fav.js', {
-        scope: '.',
-      });
+      navigator.serviceWorker.register('sw-fav.js', { scope: '.' });
     }
 
-    // this flag will stop the nav-generator
-    // rendering as new nav and wait for data
     window.hasCustomNavBeforeLoad = true;
   </script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <script
-    src="https://synle.github.io/nav-generator/index.jsx"
-    type="text/babel"
-    data-presets="react"
-    data-type="module"></script>
-  <script src="index.js"></script>
+
+  <!-- JSX Loader -->
+  <script type="module">
+    async function loadJSX(url) {
+      const src = await fetch(url).then(r => r.text());
+
+      const { code } = Babel.transform(src, {
+        presets: ["react"],
+        sourceType: "module"
+      });
+
+      const blob = new Blob([code], { type: "text/javascript" });
+      const mod = URL.createObjectURL(blob);
+      return import(mod);
+    }
+
+    await loadJSX("https://synle.github.io/nav-generator/index.jsx");
+  </script>
+
+  <!-- Separate script (unchanged, non-module) -->
+  <script src="./index.js"></script>
+</body>
 </html>
