@@ -5,7 +5,6 @@
     <title>Loading...</title>
     <link rel="stylesheet" href="https://synle.github.io/nav-generator/index.css" />
   </head>
-
   <body>
     <load></load>
     <!-- JSX Loader -->
@@ -17,7 +16,11 @@
         const cdnScripts = ['https://cdn.jsdelivr.net/npm/@babel/standalone@7.24.0/babel.min.js'];
 
         /* -------- Import Map URL Resolution -------- */
-        const importMapURL = '//synle.github.io/nav-generator/import-map.json';
+        // protocol-relative for http/https compatibility
+        const isGithubPages = location.hostname === 'synle.github.io';
+        const importMapURL = isGithubPages
+          ? '//synle.github.io/nav-generator/import-map.json'
+          : './import-map.json';
 
         for (const src of cdnScripts) {
           await new Promise((res, rej) => {
@@ -59,8 +62,10 @@
 
         /* -------- Entry -------- */
         await loadJSX('https://synle.github.io/nav-generator/index.jsx');
-        await loadJSX('./index.js'); // main entry poiint
       })();
     </script>
+
+    <!-- Separate script (unchanged, non-module) -->
+    <script src="./index.js"></script>
   </body>
 </html>
