@@ -1,56 +1,66 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Loading...</title>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Loading...</title>
+    <link rel="stylesheet" href="https://synle.github.io/nav-generator/index.css" />
+  </head>
 
-  <link rel="stylesheet" href="https://synle.github.io/nav-generator/index.css" />
-  <link rel="manifest" href="manifest.json" />
+  <body>
+    <load></load>
+    <!-- JSX Loader -->
+    <script>
+      (async function bootstrap() {
+        window.hasCustomNavBeforeLoad = true;
 
-  <!-- Babel Standalone (pinned) -->
-  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.24.0/babel.min.js"></script>
+        /* -------- Load CDN Scripts -------- */
+        const cdnScripts = ['https://cdn.jsdelivr.net/npm/@babel/standalone@7.24.0/babel.min.js'];
 
-  <!-- Import maps (pinned) -->
-  <script type="importmap">
-    {
-      "imports": {
-        "react": "https://cdn.jsdelivr.net/npm/react@18.2.0/+esm",
-        "react-dom": "https://cdn.jsdelivr.net/npm/react-dom@18.2.0/+esm"
-      }
-    }
-  </script>
-</head>
+        /* -------- Import Map URL Resolution -------- */
+        const importMapURL = '//synle.github.io/nav-generator/import-map.json';
 
-<body>
-  <load></load>
+        for (const src of cdnScripts) {
+          await new Promise((res, rej) => {
+            const s = document.createElement('script');
+            s.src = src;
+            s.onload = res;
+            s.onerror = rej;
+            document.head.appendChild(s);
+          });
+        }
 
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw-fav.js', { scope: '.' });
-    }
+        /* -------- Load Import Map -------- */
+        const importMapJSON = await fetch(importMapURL).then((r) => {
+          if (!r.ok) throw new Error('Failed to load import map');
+          return r.text();
+        });
 
-    window.hasCustomNavBeforeLoad = true;
-  </script>
+        const importMapScript = document.createElement('script');
+        importMapScript.type = 'importmap';
+        importMapScript.textContent = importMapJSON;
+        document.head.appendChild(importMapScript);
 
-  <!-- JSX Loader -->
-  <script type="module">
-    async function loadJSX(url) {
-      const src = await fetch(url).then(r => r.text());
+        /* -------- JSX Loader -------- */
+        async function loadJSX(path) {
+          const src = await fetch(path).then((r) => {
+            if (!r.ok) throw new Error(`Failed to load ${path}`);
+            return r.text();
+          });
 
-      const { code } = Babel.transform(src, {
-        presets: ["react"],
-        sourceType: "module"
-      });
+          const { code } = Babel.transform(src, {
+            presets: ['react'],
+            sourceType: 'module',
+          });
 
-      const blob = new Blob([code], { type: "text/javascript" });
-      const mod = URL.createObjectURL(blob);
-      return import(mod);
-    }
+          const blob = new Blob([code], { type: 'text/javascript' });
+          const url = URL.createObjectURL(blob);
+          return import(url);
+        }
 
-    await loadJSX("https://synle.github.io/nav-generator/index.jsx");
-  </script>
-
-  <!-- Separate script (unchanged, non-module) -->
-  <script src="./index.js"></script>
-</body>
+        /* -------- Entry -------- */
+        await loadJSX('https://synle.github.io/nav-generator/index.jsx');
+        await loadJSX('./index.js'); // main entry poiint
+      })();
+    </script>
+  </body>
 </html>
