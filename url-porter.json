@@ -63,11 +63,27 @@
     },
     {
       "from": "||tplinkwifi.net^",
-      "to": "192.168.1.1"
+      "to": "http://192.168.1.1"
+    },
+    {
+      "from": "||tplinkwifi^",
+      "to": "http://192.168.1.1"
     },
     {
       "from": "||googlefi^",
       "to": "https://fi.google.com/account"
+    },
+    {
+      "from": "||fi^",
+      "to": "https://fi.google.com/account"
+    },
+    {
+      "from": "||appscript^",
+      "to": "https://script.google.com"
+    },
+    {
+      "from": "||script^",
+      "to": "https://script.google.com"
     }
   ]
 }
