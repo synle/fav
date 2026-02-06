@@ -84,6 +84,18 @@
     {
       "from": "||script^",
       "to": "https://script.google.com"
+    },
+    {
+      "from": "||fav^",
+      "to": "https://github.com/synle/fav"
+    },
+    {
+      "from": "||gemini^",
+      "to": "https://gemini.google.com/app"
+    },
+    {
+      "from": "||gem^",
+      "to": "https://gemini.google.com/app"
     }
   ]
 }
