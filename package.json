@@ -3,12 +3,13 @@
   "version": "1.2.0",
   "private": true,
   "description": "synle-fav",
-  "dependencies": {},
-  "devDependencies": {},
+  "devDependencies": {
+    "prettier": "^3.8.1"
+  },
   "scripts": {
     "clean": "rm -f index.html import-map.json",
     "build": "sh build.sh",
-    "format": "sh format.sh",
+    "format": "prettier --write --ignore-unknown **/*.{html,js,jsx,less,css,yml,md,json,prettierrc} *.json",
     "dev": "sh dev.sh",
     "start": "npx http-server --cors ."
   },
