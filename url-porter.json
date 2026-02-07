@@ -1,101 +1,35 @@
 {
   "homepage": "https://synle.github.io/fav/",
   "configs": [
-    {
-      "from": "||drive^",
-      "to": "https://drive.google.com"
-    },
-    {
-      "from": "||calendar^",
-      "to": "https://calendar.google.com/"
-    },
-    {
-      "from": "||gmail^",
-      "to": "https://mail.google.com/mail/u/0/#inbox"
-    },
-    {
-      "from": "||outlook^",
-      "to": "https://outlook.office.com"
-    },
-    {
-      "from": "||plex^",
-      "to": "http://192.168.1.22:32400/web/index.html#!"
-    },
-    {
-      "from": "||jf^",
-      "to": "http://192.168.1.22:8096"
-    },
-    {
-      "from": "||jellyfin^",
-      "to": "http://jf"
-    },
-    {
-      "from": "||edx^",
-      "to": "https://edstem.org/us/dashboard"
-    },
-    {
-      "from": "||canvas^",
-      "to": "https://utexas.instructure.com"
-    },
-    {
-      "from": "||wagework^",
-      "to": "https://participant.wageworks.com"
-    },
-    {
-      "from": "||hn^",
-      "to": "https://news.ycombinator.com"
-    },
-    {
-      "from": "||chat^",
-      "to": "https://chatgpt.com"
-    },
-    {
-      "from": "||gpt^",
-      "to": "https://chatgpt.com"
-    },
-    {
-      "from": "||keep^",
-      "to": "https://keep.google.com/#home"
-    },
-    {
-      "from": "||zillow^",
-      "to": "https://www.zillow.com"
-    },
-    {
-      "from": "||tplinkwifi.net^",
-      "to": "http://192.168.1.1"
-    },
-    {
-      "from": "||tplinkwifi^",
-      "to": "http://192.168.1.1"
-    },
-    {
-      "from": "||googlefi^",
-      "to": "https://fi.google.com/account"
-    },
-    {
-      "from": "||fi^",
-      "to": "https://fi.google.com/account"
-    },
-    {
-      "from": "||appscript^",
-      "to": "https://script.google.com"
-    },
-    {
-      "from": "||script^",
-      "to": "https://script.google.com"
-    },
-    {
-      "from": "||fav^",
-      "to": "https://synle.github.io/fav/"
-    },
-    {
-      "from": "||gemini^",
-      "to": "https://gemini.google.com/app"
-    },
-    {
-      "from": "||gem^",
-      "to": "https://gemini.google.com/app"
-    }
+    ["drive", "https://drive.google.com"],
+    ["calendar", "https://calendar.google.com"],
+    ["gmail", "https://mail.google.com/mail/u/0/#inbox"],
+    ["outlook", "https://outlook.office.com"],
+    ["plex", "192.168.1.22:32400/web/index.html"],
+    ["jf", "192.168.1.22:8096"],
+    ["jellyfin", "jf"],
+    ["edx", "https://edstem.org/us/dashboard"],
+    ["canvas", "https://utexas.instructure.com"],
+    ["wagework", "https://participant.wageworks.com"],
+    ["hn", "https://news.ycombinator.com"],
+    ["chat", "https://chatgpt.com"],
+    ["gpt", "https://chatgpt.com"],
+    ["keep", "https://keep.google.com/#home"],
+    ["zillow", "https://www.zillow.com"],
+    ["tplinkwifi.net", "192.168.1.1"],
+    ["tplinkwifi", "tplinkwifi.net"],
+    ["googlefi", "https://fi.google.com/account"],
+    ["fi", "googlefi"],
+    ["appscript", "https://script.google.com"],
+    ["script", "appscript"],
+    ["fav", "https://synle.github.io/fav"],
+    ["gemini", "https://gemini.google.com/app"],
+    ["gem", "gemini"],
+    ["azure", "portal.azure.com"],
+    ["wagework", "https://participant.wageworks.com"],
+    ["ezreceipt", "wagework"],
+    ["slickdeals", "https://slickdeals.net"],
+    ["dealnews", "https://www.dealnews.com"],
+    ["bashrc", "https://synle.github.io/bashrc/dist/index.html"]
   ]
 }

@@ -28,23 +28,32 @@ try {
 
   // 5. Transform the configs
   const transformedConfigs = configs.map((entry) => {
-    let fromValue = (entry.from || '').trim();
-    let toValue = (entry.to || '').trim();
-
-    // Ensure it starts with ||
-    if (!fromValue.startsWith('||')) {
-      fromValue = '||' + fromValue;
+    // If the entry is an array of length 2, return as-is
+    if (Array.isArray(entry) && entry.length === 2) {
+      return entry;
     }
 
-    // Ensure it starts with http:// or https://
-    if (!toValue.startsWith('http://') && !toValue.startsWith('https://')) {
-      toValue = 'http://' + toValue;
+    let fromValue = entry.from?.trim() || '';
+    let toValue = entry.to?.trim() || '';
+
+    if (fromValue) {
+      if (!fromValue.startsWith('||')) {
+        fromValue = '||' + fromValue;
+      }
+    }
+
+    if (toValue) {
+      if (!toValue.startsWith('http://') && !toValue.startsWith('https://')) {
+        toValue = 'http://' + toValue;
+      }
+
+      toValue = toValue.replace(/\/+$/, '');
     }
 
     return {
       ...entry,
-      from: fromValue,
-      to: toValue,
+      ...(fromValue && { from: fromValue }),
+      ...(toValue && { to: toValue }),
     };
   });
 

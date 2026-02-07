@@ -89,9 +89,9 @@ const SITE_SCHEMA = `
 
 
   # source code
-  edit url porter configs | https://github.com/synle/fav/blob/main/url-porter.json
   edit nav favs | github.com/synle/fav/edit/main/index.js
   edit nav library | github.com/synle/nav-generator
+  edit url porter configs | https://github.com/synle/fav/blob/main/url-porter.json
 
   # Nav Generator
   >>>nav-fav|nav-fav>>>nav-generator|nav-generator>>>nav-template|nav-template
@@ -255,21 +255,58 @@ document.addEventListener('NavBeforeLoad', async (e) => {
   }
 
   let URL_PORTER_NOTES = `
-  >>>URL Porter Download|tabUrlPorterDownload>>>URL Porter MetaData|tabUrlPorterMetaData
-  
-  \`\`\`tabUrlPorterDownload
-  # download it
-  wget https://github.com/synle/url-porter/raw/refs/heads/main/url-porter.zip
-  unzip url-porter.zip
-  
-  # config is here
-  # https://github.com/synle/fav/blob/main/url-porter.json
-  \`\`\`
-  
-  \`\`\`tabUrlPorterMetaData
-  ${await getUrlPorterConfigs()}
-  \`\`\`
-  `;
+>>>URL Porter Download|tabUrlPorterDownload>>>URL Porter MetaData|tabUrlPorterMetaData
+
+\`\`\`tabUrlPorterDownload
+#################################################################
+################## for Mac OSX with bash ##################
+#################################################################
+
+URL="https://github.com/synle/url-porter/raw/refs/heads/main/url-porter.zip"
+BASE="$HOME/_extra"
+TARGET="$BASE/url-porter"
+TMP="/tmp/url-porter.zip"
+
+if [[ "$(uname -s)" == "Darwin" && -d "$BASE" ]]; then
+  rm -rf "$TARGET"
+  mkdir -p "$TARGET"
+  curl -L "$URL" -o "$TMP"
+  unzip -oq "$TMP" -d "$TARGET"
+  rm -f "$TMP"
+
+  echo "Installation path for url-porter:"
+  echo "$TARGET"
+fi
+echo "..."
+
+#################################################################
+################## for Windows with powershell ##################
+#################################################################
+
+$URL = "https://github.com/synle/url-porter/raw/refs/heads/main/url-porter.zip"
+$BASE = "D:\\Applications"
+$TARGET = "$BASE\\url-porter"
+$TMP = "$env:TEMP\\url-porter.zip"
+
+if (Test-Path $BASE) {
+
+    if (Test-Path $TARGET) { Remove-Item -Recurse -Force $TARGET }
+    New-Item -ItemType Directory -Path $TARGET -Force | Out-Null
+
+    Invoke-WebRequest -Uri $URL -OutFile $TMP
+    Expand-Archive -Path $TMP -DestinationPath $TARGET -Force
+    if (Test-Path $TMP) { Remove-Item $TMP -Force }
+
+    Write-Output "Installation path for url-porter:"
+    Write-Output $TARGET
+}
+Write-Output "..."
+\`\`\`
+
+\`\`\`tabUrlPorterMetaData
+${await getUrlPorterConfigs()}
+\`\`\`
+`;
 
   // construct and save the data to cache.
   renderSchema(`
