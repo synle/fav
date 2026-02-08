@@ -87,27 +87,6 @@ const SITE_SCHEMA = `
   kids letter tracing | synle.github.io/letter-tracing-generator/
   kids first 100 words | synle.github.io/letter-tracing-generator/first-grade-100-words.html
 
-
-  # source code
-  edit nav favs | github.com/synle/fav/edit/main/index.js
-  edit nav library | github.com/synle/nav-generator
-  edit url porter configs | https://github.com/synle/fav/blob/main/url-porter.json
-
-  # Nav Generator
-  >>>nav-fav|nav-fav>>>nav-generator|nav-generator>>>nav-template|nav-template
-
-  ---nav-fav
-  git clone git@github.com:synle/fav.git
-  ---
-
-  ---nav-generator
-  git clone git@github.com:synle/nav-generator.git
-  ---
-
-  ---nav-template
-  git clone git@github.com:synle/nav-generator-template.git
-  ---
-
 `;
 
 function _transformSchema(s) {
@@ -310,10 +289,15 @@ ${await getUrlPorterConfigs()}
 
   async function getUrlPorterSectionForNav() {
     try {
-      const res = JSON.parse(await getUrlPorterConfigs())
+      const res = JSON.parse(await getUrlPorterConfigs());
       return `
-    # url-porter bookmark
-    ${res.map((nav) => {
+
+    # url-porter source code
+    edit url porter configs | https://github.com/synle/fav/blob/main/url-porter.json
+
+    # url-porter bookmarks
+    ${res
+      .map((nav) => {
         let from = nav.from;
         let to = nav.to;
 
@@ -322,35 +306,67 @@ ${await getUrlPorterConfigs()}
           to = nav[1];
         }
 
-        from = (from || '').trim().replace(/^\|\|/, '')  // remove leading ||
-          .replace(/\^$/, '');   // remove trailing ^
-        to = (to || '').replace(/^https?:\/\//i, '') // remove http or https
-          .replace(/\/$/, '')            // remove trailing slash
+        from = (from || '')
           .trim()
+          .replace(/^\|\|/, '') // remove leading ||
+          .replace(/\^$/, ''); // remove trailing ^
+        to = (to || '')
+          .replace(/^https?:\/\//i, '') // remove http or https
+          .replace(/\/$/, '') // remove trailing slash
+          .trim();
         // try decoding for readability
         to = (() => {
-          try { return decodeURIComponent(to || ''); } catch { return to || ''; }
-        })().replace(/^https?:\/\//i, '').trim();
-
+          try {
+            return decodeURIComponent(to || '');
+          } catch {
+            return to || '';
+          }
+        })()
+          .replace(/^https?:\/\//i, '')
+          .trim();
 
         if (from && to) {
-          return [from, to]
+          return [from, to];
         }
 
         return [];
-      }).filter(s => s.length > 0 && s[1].includes('.')).map(([from, to]) => `${from} | ${to}`).join('\n').trim()}
-    `
-    } catch (err) {
-
-    }
-    return ''
+      })
+      .filter((s) => s.length > 0 && s[1].includes('.'))
+      .map(([from, to]) => `${from} | ${to}`)
+      .join('\n')
+      .trim()}
+    `;
+    } catch (err) {}
+    return '';
   }
+
+  let navGeneratorTabSection = `
+    # Nav Generator source code
+    edit nav favs | github.com/synle/fav/edit/main/index.js
+    edit nav library | github.com/synle/nav-generator
+
+    # Nav Generator
+    >>>nav-fav|nav-fav>>>nav-generator|nav-generator>>>nav-template|nav-template
+
+    ---nav-fav
+    git clone git@github.com:synle/fav.git
+    ---
+
+    ---nav-generator
+    git clone git@github.com:synle/nav-generator.git
+    ---
+
+    ---nav-template
+    git clone git@github.com:synle/nav-generator-template.git
+    ---
+  `;
 
   // construct and save the data to cache.
   renderSchema(`
     ${_transformSchema(SITE_SCHEMA)}
-    ${await getHostMappingSchema()}
-    ${await getUrlPorterSectionForNav()}
+    ${_transformSchema(await getUrlPorterSectionForNav())}
+    ${_transformSchema(navGeneratorTabSection)}
+    ${_transformSchema(await getHostMappingSchema())}
     ${_transformSchema(URL_PORTER_NOTES)}
   `);
 });
