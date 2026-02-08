@@ -22,7 +22,7 @@ const SITE_SCHEMA = `
   engadget | engadget.com
   verge | theverge.com
   tech crunch | techcrunch.com
-  
+
 
   # shopping and deals
   slickdeals | slickdeals.net
@@ -54,7 +54,7 @@ const SITE_SCHEMA = `
   synle | /
   email | mail.google.com/mail
   calendar | calendar.google.com/calendar
-  
+
   # dev
   github repositories | github.com/synle?tab=repositories
   code spaces | github.com/codespaces
@@ -82,7 +82,7 @@ const SITE_SCHEMA = `
   vanced YT Music | vanced.to/revanced-youtube-music-extended
   vanced Google News | vanced.to/revanced-google-news
   nova Companion | teslacoilapps.com/tesladirect/download.pl?packageName=com.teslacoilsw.launcherclientproxy&betaType=public
-  
+
   # kids
   kids letter tracing | synle.github.io/letter-tracing-generator/
   kids first 100 words | synle.github.io/letter-tracing-generator/first-grade-100-words.html
@@ -95,15 +95,15 @@ const SITE_SCHEMA = `
 
   # Nav Generator
   >>>nav-fav|nav-fav>>>nav-generator|nav-generator>>>nav-template|nav-template
-  
+
   ---nav-fav
   git clone git@github.com:synle/fav.git
   ---
-  
+
   ---nav-generator
   git clone git@github.com:synle/nav-generator.git
   ---
-  
+
   ---nav-template
   git clone git@github.com:synle/nav-generator-template.git
   ---
@@ -308,10 +308,49 @@ ${await getUrlPorterConfigs()}
 \`\`\`
 `;
 
+  async function getUrlPorterSectionForNav() {
+    try {
+      const res = JSON.parse(await getUrlPorterConfigs())
+      return `
+    # url-porter bookmark
+    ${res.map((nav) => {
+        let from = nav.from;
+        let to = nav.to;
+
+        if (Array.isArray(nav) && nav.length === 2) {
+          from = nav[0];
+          to = nav[1];
+        }
+
+        from = (from || '').trim().replace(/^\|\|/, '')  // remove leading ||
+          .replace(/\^$/, '');   // remove trailing ^
+        to = (to || '').replace(/^https?:\/\//i, '') // remove http or https
+          .replace(/\/$/, '')            // remove trailing slash
+          .trim()
+        // try decoding for readability
+        to = (() => {
+          try { return decodeURIComponent(to || ''); } catch { return to || ''; }
+        })().replace(/^https?:\/\//i, '').trim();
+
+
+        if (from && to) {
+          return [from, to]
+        }
+
+        return [];
+      }).filter(s => s.length > 0 && s[1].includes('.')).map(([from, to]) => `${from} | ${to}`).join('\n').trim()}
+    `
+    } catch (err) {
+
+    }
+    return ''
+  }
+
   // construct and save the data to cache.
   renderSchema(`
     ${_transformSchema(SITE_SCHEMA)}
     ${await getHostMappingSchema()}
+    ${await getUrlPorterSectionForNav()}
     ${_transformSchema(URL_PORTER_NOTES)}
   `);
 });
