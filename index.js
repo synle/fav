@@ -88,18 +88,29 @@ function _transformSchema(s) {
 }
 
 async function getUrlPorterConfigs() {
-  return fetch('https://synle.github.io/fav/url-porter.json')
-    .then((r) => r.json())
-    .then((data) => data.configs ?? [])
-    .catch(() => [])
-    .then((data) => JSON.stringify(data, null, 2));
+  try {
+    const r = await fetch("https://synle.github.io/fav/url-porter.json");
+    const data = await r.json();
+    return JSON.stringify(data.configs ?? [], null, 2);
+  } catch {
+    return "[]";
+  }
 }
 
-function fetchAndFormatJson(url){
-  return fetch(url)
-    .then((r) => r.text())
-    .then((data) => JSON.stringify(JSON.parse(data), null, 2))
-    .catch(() => '')
+
+async function fetchAndFormatJson(url) {
+  try {
+    const r = await fetch(url);
+    const dataAsText = await r.text();
+
+    try {
+      return JSON.stringify(JSON.parse(dataAsText), null, 2);
+    } catch {
+      return dataAsText;
+    }
+  } catch {
+    return '';
+  }
 }
 
 function getStrongPassword(isAlphaNumericOnly = false) {
@@ -337,45 +348,42 @@ ${await getUrlPorterConfigs()}
     # Nav Generator
     >>>nav-fav|nav-fav>>>nav-generator|nav-generator>>>nav-template|nav-template
 
-    ---nav-fav
+    \`\`\`nav-fav
     git clone git@github.com:synle/fav.git
-    ---
+    \`\`\`
 
-    ---nav-generator
+    \`\`\`nav-generator
     git clone git@github.com:synle/nav-generator.git
-    ---
+    \`\`\`
 
-    ---nav-template
+    \`\`\`nav-template
     git clone git@github.com:synle/nav-generator-template.git
-    ---
+    \`\`\`
   `;
 
-  async function getAndroidAppsAndNotes(){
-    return `
-      # Android
-      nova Companion | teslacoilapps.com/tesladirect/download.pl?packageName=com.teslacoilsw.launcherclientproxy&betaType=public
-      vanced micro g | vanced.to/gmscore-microg
-      vanced google photos| vanced.to/revanced-google-photos
-      vanced YT| vanced.to/revanced-youtube-extended
-      vanced YT Music | vanced.to/revanced-youtube-music-extended
-      vanced Google News | vanced.to/revanced-google-news
-
-      # RVX Configs
-      >>>rvx-yt|rvx-yt>>>rvx-music-yt|rvx-music-yt>>>rvx-sponspor-block|rvx-sponspor-block
-
-      ---rvx-yt
-      await ${fetchAndFormatJson(`https://raw.githubusercontent.com/synle/bashrc/master/android/rvx-yt.txt`)}
-      ---
-
-      ---rvx-music-yt
-      await ${fetchAndFormatJson(`https://raw.githubusercontent.com/synle/bashrc/master/android/rvx-yt-music.txt`)}
-      ---
-
-      ---rvx-sponspor-block
-      await ${fetchAndFormatJson(`https://raw.githubusercontent.com/synle/bashrc/master/android/sponsorblock.json`)}
-      ---
+  const getAndroidAppsAndNotes = async () =>
     `
-  }
+    # Android
+    nova Companion | teslacoilapps.com/tesladirect/download.pl?packageName=com.teslacoilsw.launcherclientproxy&betaType=public
+    vanced micro g | vanced.to/gmscore-microg
+    vanced google photos| vanced.to/revanced-google-photos
+    vanced YT| vanced.to/revanced-youtube-extended
+    vanced YT Music | vanced.to/revanced-youtube-music-extended
+    vanced Google News | vanced.to/revanced-google-news
+
+    # Youtube / Youtube Music / Sponsorblock RVX Configs
+    >>>rvx-yt|rvx-yt>>>rvx-music-yt|rvx-music-yt>>>rvx-sponspor-block|rvx-sponspor-block
+
+    \`\`\`rvx-yt
+    ${await fetchAndFormatJson("https://raw.githubusercontent.com/synle/bashrc/master/android/rvx-yt.txt")}
+    \`\`\`
+    \`\`\`rvx-music-yt
+    ${await fetchAndFormatJson("https://raw.githubusercontent.com/synle/bashrc/master/android/rvx-yt-music.txt")}
+    \`\`\`
+    \`\`\`rvx-sponspor-block
+    ${await fetchAndFormatJson("https://raw.githubusercontent.com/synle/bashrc/master/android/sponsorblock.json")}
+    \`\`\`
+  `;
 
   // construct and save the data to cache.
   renderSchema(`

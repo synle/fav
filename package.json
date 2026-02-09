@@ -9,7 +9,7 @@
   "scripts": {
     "clean": "rm -f index.html import-map.json",
     "build": "sh build.sh",
-    "format": "prettier --write --ignore-unknown **/*.{html,js,jsx,less,css,yml,md,json,prettierrc} *.json",
+    "format": "prettier --write --ignore-unknown **/*.{html,js,jsx,less,css,yml,md,json} *.json",
     "dev": "sh dev.sh",
     "start": "npx http-server --cors ."
   },
