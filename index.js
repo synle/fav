@@ -81,10 +81,10 @@ const SITE_SCHEMA = `
 
 function _transformSchema(s) {
   return s
-    .split('\n')
+    .split("\n")
     .map((s) => s.trim())
     .filter((s) => s)
-    .join('\n');
+    .join("\n");
 }
 
 async function getUrlPorterConfigs() {
@@ -97,7 +97,6 @@ async function getUrlPorterConfigs() {
   }
 }
 
-
 async function fetchAndFormatJson(url) {
   try {
     const r = await fetch(url);
@@ -109,7 +108,7 @@ async function fetchAndFormatJson(url) {
       return dataAsText;
     }
   } catch {
-    return '';
+    return "";
   }
 }
 
@@ -123,7 +122,7 @@ function getStrongPassword(isAlphaNumericOnly = false) {
   function _getUpperCase() {
     return `
       ABCDEFGHJKMNPQRSTUVWXYZ
-    `.replace(/[ \n\t]/g, '');
+    `.replace(/[ \n\t]/g, "");
   }
 
   function _getLowerCase() {
@@ -136,21 +135,21 @@ function getStrongPassword(isAlphaNumericOnly = false) {
       @#$%^&*()+
       [],./
       {}|<>?
-    `.replace(/[ \n\t]/g, '');
+    `.replace(/[ \n\t]/g, "");
   }
 
   function _getNumbers() {
     return `
       234567890
-    `.replace(/[ \n\t]/g, '');
+    `.replace(/[ \n\t]/g, "");
   }
 
   function _getRandomOption(choices) {
-    return choices[_getRandomInt(0, choices.length)] || '';
+    return choices[_getRandomInt(0, choices.length)] || "";
   }
 
   function _getPassword(minLength = 20) {
-    let password = '';
+    let password = "";
     let choices = [..._getNumbers(), ..._getLowerCase()];
 
     if (isAlphaNumericOnly === false) {
@@ -175,13 +174,13 @@ function getStrongPassword(isAlphaNumericOnly = false) {
   }
 
   // dispatch event to copy text to clipboard
-  const eventAppCopyTextToClipboard = new Event('AppCopyTextToClipboard');
+  const eventAppCopyTextToClipboard = new Event("AppCopyTextToClipboard");
   eventAppCopyTextToClipboard.text = _getPassword();
   document.dispatchEvent(eventAppCopyTextToClipboard);
 }
 
 // hook up custom event
-document.addEventListener('NavBeforeLoad', async (e) => {
+document.addEventListener("NavBeforeLoad", async (e) => {
   const { renderSchema } = e;
 
   if (!renderSchema) {
@@ -189,7 +188,7 @@ document.addEventListener('NavBeforeLoad', async (e) => {
   }
 
   async function getHostMappingSchema() {
-    let HOST_MAPPING_BLOCK_SCHEMA = '';
+    let HOST_MAPPING_BLOCK_SCHEMA = "";
 
     const ETC_HOST_PATH_WIN32 = `c:\\Windows\\System32\\Drivers\\etc\\hosts`;
     const ETC_HOST_PATH_OSX = `/etc/hosts`;
@@ -225,9 +224,9 @@ document.addEventListener('NavBeforeLoad', async (e) => {
       # END Sy Home Hosts
       \`\`\`
     `
-        .split('\n')
+        .split("\n")
         .map((s) => s.trim())
-        .join('\n');
+        .join("\n");
     } catch (err) {}
 
     return HOST_MAPPING_BLOCK_SCHEMA;
@@ -306,23 +305,23 @@ ${await getUrlPorterConfigs()}
           to = nav[1];
         }
 
-        from = (from || '')
+        from = (from || "")
           .trim()
-          .replace(/^\|\|/, '') // remove leading ||
-          .replace(/\^$/, ''); // remove trailing ^
-        to = (to || '')
-          .replace(/^https?:\/\//i, '') // remove http or https
-          .replace(/\/$/, '') // remove trailing slash
+          .replace(/^\|\|/, "") // remove leading ||
+          .replace(/\^$/, ""); // remove trailing ^
+        to = (to || "")
+          .replace(/^https?:\/\//i, "") // remove http or https
+          .replace(/\/$/, "") // remove trailing slash
           .trim();
         // try decoding for readability
         to = (() => {
           try {
-            return decodeURIComponent(to || '');
+            return decodeURIComponent(to || "");
           } catch {
-            return to || '';
+            return to || "";
           }
         })()
-          .replace(/^https?:\/\//i, '')
+          .replace(/^https?:\/\//i, "")
           .trim();
 
         if (from && to) {
@@ -331,13 +330,13 @@ ${await getUrlPorterConfigs()}
 
         return [];
       })
-      .filter((s) => s.length > 0 && s[1].includes('.'))
+      .filter((s) => s.length > 0 && s[1].includes("."))
       .map(([from, to]) => `${from} | ${to}`)
-      .join('\n')
+      .join("\n")
       .trim()}
     `;
     } catch (err) {}
-    return '';
+    return "";
   }
 
   let navGeneratorTabSection = `
