@@ -74,19 +74,9 @@ const SITE_SCHEMA = `
   jupyter lab Notebook | localhost:8888
   Jellyfin Host | 192.168.1.22:8096
 
-  # Android
-  vanced | vanced.to/
-  vanced micro g | vanced.to/gmscore-microg
-  vanced google photos| vanced.to/revanced-google-photos
-  vanced YT| vanced.to/revanced-youtube-extended
-  vanced YT Music | vanced.to/revanced-youtube-music-extended
-  vanced Google News | vanced.to/revanced-google-news
-  nova Companion | teslacoilapps.com/tesladirect/download.pl?packageName=com.teslacoilsw.launcherclientproxy&betaType=public
-
   # kids
   kids letter tracing | synle.github.io/letter-tracing-generator/
   kids first 100 words | synle.github.io/letter-tracing-generator/first-grade-100-words.html
-
 `;
 
 function _transformSchema(s) {
@@ -98,19 +88,18 @@ function _transformSchema(s) {
 }
 
 async function getUrlPorterConfigs() {
-  const url = 'https://synle.github.io/fav/url-porter.json';
-
-  return fetch(url)
-    .then((r) => {
-      if (!r.ok) throw new Error('Failed to fetch remote configs');
-      return r.json();
-    })
+  return fetch('https://synle.github.io/fav/url-porter.json')
+    .then((r) => r.json())
     .then((data) => data.configs ?? [])
-    .catch((err) => {
-      console.error(err);
-      return [];
-    })
+    .catch(() => [])
     .then((data) => JSON.stringify(data, null, 2));
+}
+
+function fetchAndFormatJson(url){
+  return fetch(url)
+    .then((r) => r.text())
+    .then((data) => JSON.stringify(JSON.parse(data), null, 2))
+    .catch(() => '')
 }
 
 function getStrongPassword(isAlphaNumericOnly = false) {
@@ -361,9 +350,37 @@ ${await getUrlPorterConfigs()}
     ---
   `;
 
+  async function getAndroidAppsAndNotes(){
+    return `
+      # Android
+      nova Companion | teslacoilapps.com/tesladirect/download.pl?packageName=com.teslacoilsw.launcherclientproxy&betaType=public
+      vanced micro g | vanced.to/gmscore-microg
+      vanced google photos| vanced.to/revanced-google-photos
+      vanced YT| vanced.to/revanced-youtube-extended
+      vanced YT Music | vanced.to/revanced-youtube-music-extended
+      vanced Google News | vanced.to/revanced-google-news
+
+      # RVX Configs
+      >>>rvx-yt|rvx-yt>>>rvx-music-yt|rvx-music-yt>>>rvx-sponspor-block|rvx-sponspor-block
+
+      ---rvx-yt
+      await ${fetchAndFormatJson(`https://raw.githubusercontent.com/synle/bashrc/master/android/rvx-yt.txt`)}
+      ---
+
+      ---rvx-music-yt
+      await ${fetchAndFormatJson(`https://raw.githubusercontent.com/synle/bashrc/master/android/rvx-yt-music.txt`)}
+      ---
+
+      ---rvx-sponspor-block
+      await ${fetchAndFormatJson(`https://raw.githubusercontent.com/synle/bashrc/master/android/sponsorblock.json`)}
+      ---
+    `
+  }
+
   // construct and save the data to cache.
   renderSchema(`
     ${_transformSchema(SITE_SCHEMA)}
+    ${_transformSchema(await getAndroidAppsAndNotes())}
     ${_transformSchema(await getUrlPorterSectionForNav())}
     ${_transformSchema(navGeneratorTabSection)}
     ${_transformSchema(await getHostMappingSchema())}
