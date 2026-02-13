@@ -203,12 +203,12 @@ document.addEventListener("NavBeforeLoad", async (e) => {
 
       HOST_MAPPING_BLOCK_SCHEMA = `
       Host Mapping Ip Config|https://github.com/synle/bashrc/blob/master/software/metadata/ip-address.config
-      >>> Host Files Location|tabHostDir >>> Host IPs|tabHostNamesGroupedByIp >>> /etc/hosts Mapping|tabHostMappings
-      \`\`\`tabHostDir
-      # Windows
+      >>> Windows Hosts Location|tabHostDirWindow >>> Linux Hosts Location|tabHostDirLinux  >>> Host IPs|tabHostNamesGroupedByIp >>> /etc/hosts Mapping|tabHostMappings
+      \`\`\`tabHostDirWindow
       ${ETC_HOST_PATH_WIN32}
+      \`\`\`
 
-      # Linux
+      \`\`\`tabHostDirLinux
       ${ETC_HOST_PATH_OSX}
       \`\`\`
 
@@ -371,7 +371,7 @@ ${await getUrlPorterConfigs()}
     vanced Google News | vanced.to/revanced-google-news
 
     # Youtube / Youtube Music / Sponsorblock RVX Configs
-    >>>rvx-yt|rvx-yt>>>rvx-music-yt|rvx-music-yt>>>rvx-sponspor-block|rvx-sponspor-block
+    >>>RVX Youtube|rvx-yt>>>RVX Youtube Music|rvx-music-yt>>>RVX Sponsorblock|rvx-sponspor-block
 
     \`\`\`rvx-yt
     ${await fetchAndFormatJson("https://raw.githubusercontent.com/synle/bashrc/master/android/rvx-yt.txt")}
