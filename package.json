@@ -7,9 +7,9 @@
     "prettier": "^3.8.1"
   },
   "scripts": {
-    "clean": "rm -f index.html import-map.json",
+    "clean": "rm -f index.html import-map.json .prettier-cache",
     "build": "sh build.sh",
-    "format": "prettier --write --ignore-unknown **/*.{html,js,jsx,less,css,yml,md,json} *.json",
+    "format": "prettier --write --ignore-unknown --cache '**/*.{js,jsx,ts,tsx,mjs,cjs,json,html,css,scss,less,md,yml,yaml,graphql,vue,xml}'",
     "dev": "sh dev.sh",
     "start": "npx http-server --cors ."
   },
