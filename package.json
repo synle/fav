@@ -9,7 +9,7 @@
   "scripts": {
     "clean": "rm -f index.html import-map.json .prettier-cache",
     "build": "sh build.sh",
-    "format": "prettier --write --ignore-unknown --cache '**/*.{js,jsx,ts,tsx,mjs,cjs,json,html,css,scss,less,md,yml,yaml,graphql,vue,xml}'",
+    "format": "prettier --write --print-width 140 --ignore-unknown --no-error-on-unmatched-pattern --cache '**/*.{js,jsx,ts,tsx,mjs,cjs,json,html,css,scss,less,md,yml,yaml,graphql,vue,xml}'",
     "dev": "sh dev.sh",
     "start": "npx http-server --cors ."
   },
