@@ -203,7 +203,7 @@ document.addEventListener("NavBeforeLoad", async (e) => {
 
       HOST_MAPPING_BLOCK_SCHEMA = `
       Host Mapping Ip Config|https://github.com/synle/bashrc/blob/master/software/metadata/ip-address.config
-      >>> Windows Hosts Location|tabHostDirWindow >>> Linux Hosts Location|tabHostDirLinux  >>> Host IPs|tabHostNamesGroupedByIp >>> /etc/hosts Mapping|tabHostMappings
+      >>> Windows Hosts|tabHostDirWindow >>> Linux Hosts|tabHostDirLinux  >>> IPs|tabHostNamesGroupedByIp >>> /etc/hosts|tabHostMappings
       \`\`\`tabHostDirWindow
       ${ETC_HOST_PATH_WIN32}
       \`\`\`
