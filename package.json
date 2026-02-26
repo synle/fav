@@ -8,9 +8,9 @@
   },
   "scripts": {
     "clean": "rm -f index.html import-map.json .prettier-cache",
-    "build": "sh build.sh",
-    "format": "prettier --write --print-width 140 --ignore-unknown --no-error-on-unmatched-pattern --cache '**/*.{js,jsx,ts,tsx,mjs,cjs,json,html,css,scss,less,md,yml,yaml,graphql,vue,xml}'",
-    "dev": "sh dev.sh",
+    "build": "bash build.sh",
+    "format": "prettier --write --cache --ignore-unknown --no-error-on-unmatched-pattern --print-width 140 .",
+    "dev": "bash dev.sh",
     "start": "npx http-server --cors ."
   },
   "keywords": [
