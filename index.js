@@ -195,13 +195,15 @@ document.addEventListener("NavBeforeLoad", async (e) => {
 
     try {
       const HOSTNAMES_GROUPED_BY_ID = await fetch(
-        `https://raw.githubusercontent.com/synle/bashrc/master/software/metadata/ip-address.config.hostnamesGroupedByID`,
+        `https://raw.githubusercontent.com/synle/bashrc/master/.build/ip-address.config.hostnamesGroupedByID`,
       ).then((r) => r.text());
       const HOSTNAMES_MAPPINGS = await fetch(
-        `https://raw.githubusercontent.com/synle/bashrc/master/software/metadata/ip-address.config.etcHostnamesMappings`,
+        `https://raw.githubusercontent.com/synle/bashrc/master/.build/ip-address.config.etcHostnamesMappings`,
       ).then((r) => r.text());
 
       HOST_MAPPING_BLOCK_SCHEMA = `
+
+      # Host Mappings
       Host Mapping Ip Config|https://github.com/synle/bashrc/blob/master/software/metadata/ip-address.config
       >>> Windows Hosts|tabHostDirWindow >>> Linux Hosts|tabHostDirLinux  >>> IPs|tabHostNamesGroupedByIp >>> /etc/hosts|tabHostMappings
       \`\`\`tabHostDirWindow
@@ -233,7 +235,8 @@ document.addEventListener("NavBeforeLoad", async (e) => {
   }
 
   let URL_PORTER_NOTES = `
->>>URL Porter Download|tabUrlPorterDownload>>>URL Porter MetaData|tabUrlPorterMetaData
+# URL Porter
+>>>Download|tabUrlPorterDownload>>>MetaData|tabUrlPorterMetaData
 
 \`\`\`tabUrlPorterDownload
 #################################################################
@@ -345,7 +348,7 @@ ${await getUrlPorterConfigs()}
     edit nav library | github.com/synle/nav-generator
 
     # Nav Generator
-    >>>nav-fav|nav-fav>>>nav-generator|nav-generator>>>nav-template|nav-template
+    >>>Fav|nav-fav>>>Generator|nav-generator>>>Template|nav-template
 
     \`\`\`nav-fav
     git clone git@github.com:synle/fav.git
@@ -374,13 +377,13 @@ ${await getUrlPorterConfigs()}
     >>>RVX Youtube|rvx-yt>>>RVX Youtube Music|rvx-music-yt>>>RVX Sponsorblock|rvx-sponspor-block
 
     \`\`\`rvx-yt
-    ${await fetchAndFormatJson("https://raw.githubusercontent.com/synle/bashrc/master/android/rvx-yt.txt")}
+    ${await fetchAndFormatJson("https://raw.githubusercontent.com/synle/bashrc/master/docs/android/rvx-yt.txt")}
     \`\`\`
     \`\`\`rvx-music-yt
-    ${await fetchAndFormatJson("https://raw.githubusercontent.com/synle/bashrc/master/android/rvx-yt-music.txt")}
+    ${await fetchAndFormatJson("https://raw.githubusercontent.com/synle/bashrc/master/docs/android/rvx-yt-music.txt")}
     \`\`\`
     \`\`\`rvx-sponspor-block
-    ${await fetchAndFormatJson("https://raw.githubusercontent.com/synle/bashrc/master/android/sponsorblock.json")}
+    ${await fetchAndFormatJson("https://raw.githubusercontent.com/synle/bashrc/master/docs/android/sponsorblock.json")}
     \`\`\`
   `;
 
