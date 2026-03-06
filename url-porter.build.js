@@ -10,10 +10,7 @@ try {
 
   // 2. Strip comments (single line // and multi-line /* */)
   // This allows JSON.parse to work even if comments are present
-  const jsonWithoutComments = rawData.replace(
-    /\\"|"(?:\\"|[^"])*"|(\/\/.*|\/\*[\s\S]*?\*\/)/g,
-    (m, g) => (g ? "" : m),
-  );
+  const jsonWithoutComments = rawData.replace(/\\"|"(?:\\"|[^"])*"|(\/\/.*|\/\*[\s\S]*?\*\/)/g, (m, g) => (g ? "" : m));
 
   // 3. Parse the cleaned data
   const parsedData = JSON.parse(jsonWithoutComments);
@@ -28,33 +25,50 @@ try {
 
   // 5. Transform the configs
   const transformedConfigs = configs.map((entry) => {
+    let fromValue = "";
+    let toValue = "";
+    let remainingEntries = {};
+
     // If the entry is an array of length 2, return as-is
     if (Array.isArray(entry) && entry.length === 2) {
-      return entry;
+      [fromValue, toValue] = entry;
+    } else {
+      const { from, to, ...remainingEntries } = entry;
+
+      fromValue = from?.trim() || "";
+      toValue = to?.trim() || "";
     }
 
-    let fromValue = entry.from?.trim() || "";
-    let toValue = entry.to?.trim() || "";
-
     if (fromValue) {
-      if (!fromValue.startsWith("||")) {
-        fromValue = "||" + fromValue;
-      }
+      fromValue = fromValue
+        .replace(/^\|\|/, "") // Remove || from start
+        .replace(/^\^|\^$/g, "") // Remove ^ from start OR end
+        .toLowerCase()
     }
 
     if (toValue) {
-      if (!toValue.startsWith("http://") && !toValue.startsWith("https://")) {
-        toValue = "http://" + toValue;
+      // 1. Ensure the URL starts with a protocol (http:// or https://)
+      // Uses a case-insensitive regex check
+      if (!/^https?:\/\//i.test(toValue)) {
+        toValue = `http://${toValue}`;
       }
 
+      // 2. Remove any trailing slashes from the end of the URL
       toValue = toValue.replace(/\/+$/, "");
     }
 
-    return {
-      ...entry,
-      ...(fromValue && { from: fromValue }),
-      ...(toValue && { to: toValue }),
-    };
+    // option 1: use of the old {} format
+    // return {
+    //   ...remainingEntries,
+    //   ...(fromValue && { from: fromValue }),
+    //   ...(toValue && { to: toValue }),
+    // };
+
+    // option 2: more mainstream array of 2 [from, to]
+    return [
+      fromValue,
+      toValue
+    ];
   });
 
   // 6. Create result object
