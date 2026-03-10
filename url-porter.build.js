@@ -66,7 +66,7 @@ try {
 
     // option 2: more mainstream array of 2 [from, to]
     return [
-      fromValue,
+      `||${fromValue}^`,
       toValue
     ];
   });
