@@ -11,7 +11,7 @@
     "build": "bash build.sh",
     "format": "prettier --write --cache --ignore-unknown --no-error-on-unmatched-pattern --print-width 140 .",
     "dev": "bash dev.sh",
-    "start": "npx http-server --cors ."
+    "start": "npx http-server --cors -a 127.0.0.1 ."
   },
   "keywords": [
     "Sy",
