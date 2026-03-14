@@ -43,6 +43,10 @@ try {
       fromValue = fromValue
         .replace(/^\|\|/, "") // Remove || from start
         .replace(/^\^|\^$/g, "") // Remove ^ from start OR end
+        .replace(/[^\x20-\x7E]/g, "") // Strip invisible/non-ASCII unicode characters
+        .replace(/\|\|/g, "") // Remove any remaining ||
+        .replace(/\^/g, "") // Remove any remaining ^
+        .trim()
         .toLowerCase()
     }
 
@@ -66,7 +70,7 @@ try {
 
     // option 2: more mainstream array of 2 [from, to]
     return [
-      `||${fromValue}^`,
+      fromValue,
       toValue
     ];
   });
