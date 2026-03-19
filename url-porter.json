@@ -158,10 +158,6 @@
       "https://www.linkedin.com/feed"
     ],
     [
-      "url-porter",
-      "https://github.com/synle/fav/blob/main/url-porter.json"
-    ],
-    [
       "codespace",
       "https://github.com/codespaces"
     ],
@@ -174,8 +170,12 @@
       "https://prettier.io/playground"
     ],
     [
-      "urlporter",
+      "url-porter-edit",
       "https://github.com/synle/fav/edit/main/url-porter.json"
-    ]
+    ],
+    [
+      "url-porter-view",
+      "https://github.com/synle/fav/blob/main/url-porter.json"
+    ],
   ]
 }
