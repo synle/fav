@@ -179,6 +179,32 @@ function getStrongPassword(isAlphaNumericOnly = false) {
   document.dispatchEvent(eventAppCopyTextToClipboard);
 }
 
+// URL Porter bookmark injection from Chrome extension content script
+const urlPorterBookmarksPromise = new Promise((resolve) => {
+  document.addEventListener("urlPorterBookmarks", (e) => {
+    const bookmarks = e.detail || [];
+    console.log("URL Porter bookmarks:", bookmarks);
+    if (bookmarks.length === 0) {
+      resolve("");
+      return;
+    }
+    const lines = bookmarks
+      .map((b) => {
+        const url = (b.url || "")
+          .replace(/^https?:\/\//i, "")
+          .replace(/\/$/, "")
+          .trim();
+        const title = (b.title || url).trim();
+        return title && url ? `${title} | ${url}` : "";
+      })
+      .filter(Boolean)
+      .join("\n");
+    resolve(`\n# url-porter extra\n${lines}`);
+  });
+  // Timeout after 2s if extension is not installed
+  setTimeout(() => resolve(""), 2000);
+});
+
 // hook up custom event
 document.addEventListener("NavBeforeLoad", async (e) => {
   const { renderSchema } = e;
@@ -388,6 +414,7 @@ ${await getUrlPorterConfigs()}
   `;
 
   // construct and save the data to cache.
+  const urlPorterExtra = await urlPorterBookmarksPromise;
   renderSchema(`
     ${_transformSchema(SITE_SCHEMA)}
     ${_transformSchema(await getAndroidAppsAndNotes())}
@@ -395,5 +422,6 @@ ${await getUrlPorterConfigs()}
     ${_transformSchema(navGeneratorTabSection)}
     ${_transformSchema(await getHostMappingSchema())}
     ${_transformSchema(URL_PORTER_NOTES)}
+    ${_transformSchema(urlPorterExtra)}
   `);
 });
