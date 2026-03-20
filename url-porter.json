@@ -1,4 +1,6 @@
-[
+{
+  "homepage": "https://synle.github.io/fav/",
+  "configs": [
     [
       "drive",
       "https://drive.google.com"
@@ -176,3 +178,4 @@
       "https://github.com/synle/fav/blob/main/url-porter.json"
     ]
   ]
+}
