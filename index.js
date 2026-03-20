@@ -194,7 +194,7 @@ const urlPorterBookmarksPromise = new Promise((resolve) => {
           .replace(/^https?:\/\//i, "")
           .replace(/\/$/, "")
           .trim();
-        const title = (b.title || url).trim();
+        const title = (b.title || url).replace(/^#+\s*/, "").trim();
         return title && url ? `${title} | ${url}` : "";
       })
       .filter(Boolean)
