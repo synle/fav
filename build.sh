@@ -4,5 +4,5 @@ curl -s -S -o index.html https://synle.github.io/nav-generator/index.template.ht
 echo 'Download dev.sh template'
 curl -s -S -o dev.sh https://synle.github.io/nav-generator/dev.sh
 
-echo 'Build URL Porter JSON'
-node url-porter.build.js
+echo 'Build / Clean URL Porter JSON Config'
+curl -s -S https://synle.github.io/url-porter/url-porter.clean-config.js | node
