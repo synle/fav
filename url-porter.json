@@ -1,174 +1,48 @@
-[
-  [
-    "drive",
-    "https://drive.google.com"
-  ],
-  [
-    "calendar",
-    "https://calendar.google.com"
-  ],
-  [
-    "gmail",
-    "https://mail.google.com/mail/u/0/#inbox"
-  ],
-  [
-    "outlook",
-    "https://outlook.office.com"
-  ],
-  [
-    "plex",
-    "http://192.168.1.22:32400/web/index.html"
-  ],
-  [
-    "jf",
-    "http://192.168.1.22:8096"
-  ],
-  [
-    "jellyfin",
-    "http://jf"
-  ],
-  [
-    "edx",
-    "https://edstem.org/us/dashboard"
-  ],
-  [
-    "canvas",
-    "https://utexas.instructure.com"
-  ],
-  [
-    "wagework",
-    "https://participant.wageworks.com"
-  ],
-  [
-    "hn",
-    "https://news.ycombinator.com"
-  ],
-  [
-    "chat",
-    "https://chatgpt.com"
-  ],
-  [
-    "gpt",
-    "https://chatgpt.com"
-  ],
-  [
-    "keep",
-    "https://keep.google.com/#home"
-  ],
-  [
-    "zillow",
-    "https://www.zillow.com"
-  ],
-  [
-    "tplinkwifi.net",
-    "http://192.168.1.1"
-  ],
-  [
-    "tplinkwifi",
-    "http://tplinkwifi.net"
-  ],
-  [
-    "googlefi",
-    "https://fi.google.com/account"
-  ],
-  [
-    "fi",
-    "http://googlefi"
-  ],
-  [
-    "appscript",
-    "https://script.google.com"
-  ],
-  [
-    "script",
-    "http://appscript"
-  ],
-  [
-    "fav",
-    "https://synle.github.io/fav"
-  ],
-  [
-    "gemini",
-    "https://gemini.google.com/app"
-  ],
-  [
-    "gem",
-    "http://gemini"
-  ],
-  [
-    "azure",
-    "http://portal.azure.com"
-  ],
-  [
-    "ezreceipt",
-    "http://wagework"
-  ],
-  [
-    "slickdeals",
-    "https://slickdeals.net"
-  ],
-  [
-    "dealnews",
-    "https://www.dealnews.com"
-  ],
-  {
-    "from": "bashrc",
-    "to": "https://synle.github.io/bashrc/"
-  },
-  [
-    "glean",
-    "http://app.glean.com"
-  ],
-  [
-    "gleanchat",
-    "http://app.glean.com/chat"
-  ],
-  [
-    "appletv",
-    "https://tv.apple.com"
-  ],
-  [
-    "disney+",
-    "https://www.disneyplus.com/home"
-  ],
-  [
-    "netflix",
-    "https://www.netflix.com/browse"
-  ],
-  [
-    "primevideo",
-    "https://www.amazon.com/amazon-video/b/?&node=2858778011&ref=dvm_mlp_rowna_us_1"
-  ],
-  [
-    "fb",
-    "https://www.facebook.com"
-  ],
-  [
-    "facebook",
-    "https://www.facebook.com"
-  ],
-  [
-    "linkedin",
-    "https://www.linkedin.com/feed"
-  ],
-  {
-    "from": "codespaces",
-    "to": "https://github.com/codespaces"
-  },
-  {
-    "from": "codespace",
-    "to": "https://symmetrical-yodel-wgj5q7xj69c5475.github.dev/"
-  },
-  [
-    "prettier",
-    "https://prettier.io/playground"
-  ],
-  [
-    "url-porter-edit",
-    "https://github.com/synle/fav/edit/main/url-porter.json"
-  ],
-  [
-    "url-porter-view",
-    "https://github.com/synle/fav/blob/main/url-porter.json"
+{
+  "homepage": "https://synle.github.io/fav/",
+  "configs": [
+    ["drive", "https://drive.google.com"],
+    ["calendar", "https://calendar.google.com"],
+    ["gmail", "https://mail.google.com/mail/u/0/#inbox"],
+    ["outlook", "https://outlook.office.com"],
+    ["plex", "http://192.168.1.22:32400/web/index.html"],
+    ["jf", "http://192.168.1.22:8096"],
+    ["jellyfin", "http://jf"],
+    ["edx", "https://edstem.org/us/dashboard"],
+    ["canvas", "https://utexas.instructure.com"],
+    ["wagework", "https://participant.wageworks.com"],
+    ["hn", "https://news.ycombinator.com"],
+    ["chat", "https://chatgpt.com"],
+    ["gpt", "https://chatgpt.com"],
+    ["keep", "https://keep.google.com/#home"],
+    ["zillow", "https://www.zillow.com"],
+    ["tplinkwifi.net", "http://192.168.1.1"],
+    ["tplinkwifi", "http://tplinkwifi.net"],
+    ["googlefi", "https://fi.google.com/account"],
+    ["fi", "http://googlefi"],
+    ["appscript", "https://script.google.com"],
+    ["script", "http://appscript"],
+    ["fav", "https://synle.github.io/fav"],
+    ["gemini", "https://gemini.google.com/app"],
+    ["gem", "http://gemini"],
+    ["azure", "http://portal.azure.com"],
+    ["ezreceipt", "http://wagework"],
+    ["slickdeals", "https://slickdeals.net"],
+    ["dealnews", "https://www.dealnews.com"],
+    ["bashrc", "https://synle.github.io/bashrc"],
+    ["glean", "http://app.glean.com"],
+    ["gleanchat", "http://app.glean.com/chat"],
+    ["appletv", "https://tv.apple.com"],
+    ["disney+", "https://www.disneyplus.com/home"],
+    ["netflix", "https://www.netflix.com/browse"],
+    ["primevideo", "https://www.amazon.com/amazon-video/b/?&node=2858778011&ref=dvm_mlp_rowna_us_1"],
+    ["fb", "https://www.facebook.com"],
+    ["facebook", "https://www.facebook.com"],
+    ["linkedin", "https://www.linkedin.com/feed"],
+    ["codespaces", "https://github.com/codespaces"],
+    ["codespace", "https://symmetrical-yodel-wgj5q7xj69c5475.github.dev"],
+    ["prettier", "https://prettier.io/playground"],
+    ["url-porter-edit", "https://github.com/synle/fav/edit/main/url-porter.json"],
+    ["url-porter-view", "https://github.com/synle/fav/blob/main/url-porter.json"]
   ]
-]
+}
