@@ -9,5 +9,6 @@ https://api.github.com/repos/synle/bashrc/contents/webapp/common.scss
 ```
 
 Do NOT use these URL patterns:
+
 - `curl -L "https://github.com/synle/bashrc/blob/HEAD/webapp/common.scss?raw=true"`
 - `https://raw.githubusercontent.com/synle/bashrc/HEAD/webapp/common.scss`
