@@ -221,10 +221,10 @@ document.addEventListener("NavBeforeLoad", async (e) => {
 
     try {
       const HOSTNAMES_GROUPED_BY_ID = await fetch(
-        `https://raw.githubusercontent.com/synle/bashrc/master/.build/ip-address.config.hostnamesGroupedByID`,
+        `https://api.github.com/repos/synle/bashrc/contents/.build/ip-address.config.hostnamesGroupedByID`,
       ).then((r) => r.text());
       const HOSTNAMES_MAPPINGS = await fetch(
-        `https://raw.githubusercontent.com/synle/bashrc/master/.build/ip-address.config.etcHostnamesMappings`,
+        `https://api.github.com/repos/synle/bashrc/contents/.build/ip-address.config.etcHostnamesMappings`,
       ).then((r) => r.text());
 
       HOST_MAPPING_BLOCK_SCHEMA = `
@@ -403,13 +403,13 @@ ${await getUrlPorterConfigs()}
     >>>RVX Youtube|rvx-yt>>>RVX Youtube Music|rvx-music-yt>>>RVX Sponsorblock|rvx-sponspor-block
 
     \`\`\`rvx-yt
-    ${await fetchAndFormatJson("https://raw.githubusercontent.com/synle/bashrc/master/docs/android/rvx-yt.txt")}
+    ${await fetchAndFormatJson("https://api.github.com/repos/synle/bashrc/contents/docs/android/rvx-yt.txt")}
     \`\`\`
     \`\`\`rvx-music-yt
-    ${await fetchAndFormatJson("https://raw.githubusercontent.com/synle/bashrc/master/docs/android/rvx-yt-music.txt")}
+    ${await fetchAndFormatJson("https://api.github.com/repos/synle/bashrc/contents/docs/android/rvx-yt-music.txt")}
     \`\`\`
     \`\`\`rvx-sponspor-block
-    ${await fetchAndFormatJson("https://raw.githubusercontent.com/synle/bashrc/master/docs/android/sponsorblock.json")}
+    ${await fetchAndFormatJson("https://api.github.com/repos/synle/bashrc/contents/docs/android/sponsorblock.json")}
     \`\`\`
   `;
 
