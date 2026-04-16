@@ -2,13 +2,13 @@
 
 ## GitHub Raw File URLs
 
-When referencing raw file content from GitHub repos (e.g. `synle/bashrc`), use the GitHub Contents API:
+When fetching raw file content from GitHub repos, always use the `?raw=true` blob URL format:
 
 ```
-https://api.github.com/repos/synle/bashrc/contents/webapp/common.scss
+https://github.com/{owner}/{repo}/blob/head/{path}?raw=true
 ```
 
-Do NOT use these URL patterns:
+Do NOT use:
 
-- `curl -L "https://github.com/synle/bashrc/blob/HEAD/webapp/common.scss?raw=true"`
-- `https://raw.githubusercontent.com/synle/bashrc/HEAD/webapp/common.scss`
+- `https://api.github.com/repos/{owner}/{repo}/contents/{path}` (GitHub Contents API)
+- `https://raw.githubusercontent.com/{owner}/{repo}/{branch}/{path}`
