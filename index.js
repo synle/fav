@@ -244,7 +244,7 @@ document.addEventListener("NavBeforeLoad", async (e) => {
 # URL Porter & Nav Generator
 Host Mapping Ip Config | https://github.com/synle/bashrc/blob/master/software/metadata/ip-address.config
 
->>>URL Porter|tabUrlPorter>>>RVX Youtube / Music / Sponsorblock|tabRvx>>>Nav Generator|tabNavGen>>>IP|tabIps
+>>>URL Porter|tabUrlPorter>>>RVX Youtube / Music / Sponsorblock|tabRvx>>>Fav / Nav Generator|tabNavGen>>>IP|tabIps
 
 :::tabUrlPorter
 Edit URL Porter Configs | https://github.com/synle/fav/edit/main/url-porter.json
@@ -319,8 +319,8 @@ ${rvxSponsorblock}
 :::
 
 :::tabNavGen
-edit nav favs | github.com/synle/fav/edit/main/index.js
-edit nav library | github.com/synle/nav-generator
+Edit Fav | github.com/synle/fav/edit/main/index.js
+Edit Nav Library Code | github.com/synle/nav-generator
 
 \`\`\`
 # Nav Generator Fav
