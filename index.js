@@ -250,8 +250,11 @@ document.addEventListener("NavBeforeLoad", async (e) => {
   }
 
   let URL_PORTER_NOTES = `
-# URL Porter
->>>Download|tabUrlPorterDownload>>>MetaData|tabUrlPorterMetaData
+# URL Porter & Nav Generator
+edit nav favs | github.com/synle/fav/edit/main/index.js
+edit nav library | github.com/synle/nav-generator
+
+>>>URL Port Download|tabUrlPorterDownload>>>URL Port MetaData|tabUrlPorterMetaData>>>Nav Gen Fav|nav-fav>>>Nav Gen Generator|nav-generator>>>Nav Gen Template|nav-template
 
 \`\`\`tabUrlPorterDownload
 #################################################################
@@ -301,6 +304,18 @@ Write-Output "..."
 
 \`\`\`tabUrlPorterMetaData
 ${await getUrlPorterConfigs()}
+\`\`\`
+
+\`\`\`nav-fav
+git clone git@github.com:synle/fav.git
+\`\`\`
+
+\`\`\`nav-generator
+git clone git@github.com:synle/nav-generator.git
+\`\`\`
+
+\`\`\`nav-template
+git clone git@github.com:synle/nav-generator-template.git
 \`\`\`
 `;
 
@@ -357,27 +372,6 @@ ${await getUrlPorterConfigs()}
     return "";
   }
 
-  let navGeneratorTabSection = `
-    # Nav Generator source code
-    edit nav favs | github.com/synle/fav/edit/main/index.js
-    edit nav library | github.com/synle/nav-generator
-
-    # Nav Generator
-    >>>Fav|nav-fav>>>Generator|nav-generator>>>Template|nav-template
-
-    \`\`\`nav-fav
-    git clone git@github.com:synle/fav.git
-    \`\`\`
-
-    \`\`\`nav-generator
-    git clone git@github.com:synle/nav-generator.git
-    \`\`\`
-
-    \`\`\`nav-template
-    git clone git@github.com:synle/nav-generator-template.git
-    \`\`\`
-  `;
-
   const getAndroidAppsAndNotes = async () =>
     `
     # Android
@@ -408,7 +402,6 @@ ${await getUrlPorterConfigs()}
     ${_transformSchema(SITE_SCHEMA)}
     ${_transformSchema(await getAndroidAppsAndNotes())}
     ${_transformSchema(await getUrlPorterSectionForNav())}
-    ${_transformSchema(navGeneratorTabSection)}
     ${_transformSchema(await getHostMappingSchema())}
     ${_transformSchema(URL_PORTER_NOTES)}
     ${_transformSchema(urlPorterExtra)}
