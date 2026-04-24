@@ -230,18 +230,21 @@ document.addEventListener("NavBeforeLoad", async (e) => {
     const ETC_HOST_PATH_WIN32 = `c:\\Windows\\System32\\Drivers\\etc\\hosts`;
     const ETC_HOST_PATH_OSX = `/etc/hosts`;
 
-    const [ipAddressConfig, urlPorterJson] = await Promise.all([
+    const [ipAddressConfig, urlPorterJson, rvxYt, rvxYtMusic, rvxSponsorblock] = await Promise.all([
       fetch(`${BASHRC_RAW_BASE_URL}/software/metadata/ip-address.config`)
         .then((r) => r.text())
         .catch(() => ""),
       getUrlPorterConfigs(),
+      fetchAndFormatJson(`${BASHRC_RAW_BASE_URL}/docs/android/rvx-yt.txt`),
+      fetchAndFormatJson(`${BASHRC_RAW_BASE_URL}/docs/android/rvx-yt-music.txt`),
+      fetchAndFormatJson(`${BASHRC_RAW_BASE_URL}/docs/android/sponsorblock.json`),
     ]);
 
     return `
 # URL Porter & Nav Generator
 Host Mapping Ip Config | https://github.com/synle/bashrc/blob/master/software/metadata/ip-address.config
 
->>>URL Porter|tabUrlPorter>>>Nav Gen|tabNavGen>>>IPs|tabIps
+>>>URL Porter|tabUrlPorter>>>RVX|tabRvx>>>Nav Gen|tabNavGen>>>IPs|tabIps
 
 :::tabUrlPorter
 edit url porter configs | https://github.com/synle/fav/blob/main/url-porter.json
@@ -298,6 +301,22 @@ Write-Output "..."
 
 \`\`\`tabPortMeta
 ${urlPorterJson}
+\`\`\`
+:::
+
+:::tabRvx
+>>>RVX Youtube|tabRvxYt>>>RVX YT Music|tabRvxYtMusic>>>RVX Sponsorblock|tabRvxSponsorblock
+
+\`\`\`tabRvxYt
+${rvxYt}
+\`\`\`
+
+\`\`\`tabRvxYtMusic
+${rvxYtMusic}
+\`\`\`
+
+\`\`\`tabRvxSponsorblock
+${rvxSponsorblock}
 \`\`\`
 :::
 
@@ -385,8 +404,9 @@ ${ipAddressConfig}
     return "";
   }
 
-  const getAndroidAppsAndNotes = async () =>
-    `
+  // Android apps list. RVX tab block previously lived here — it has
+  // moved into the RVX tab inside the URL Porter & Nav Generator section.
+  const getAndroidAppsAndNotes = () => `
     # Android
     nova Companion | teslacoilapps.com/tesladirect/download.pl?packageName=com.teslacoilsw.launcherclientproxy&betaType=public
     vanced micro g | vanced.to/gmscore-microg
@@ -394,26 +414,13 @@ ${ipAddressConfig}
     vanced YT| vanced.to/revanced-youtube-extended
     vanced YT Music | vanced.to/revanced-youtube-music-extended
     vanced Google News | vanced.to/revanced-google-news
-
-    # Youtube / Youtube Music / Sponsorblock RVX Configs
-    >>>RVX Youtube|rvx-yt>>>RVX Youtube Music|rvx-music-yt>>>RVX Sponsorblock|rvx-sponspor-block
-
-    \`\`\`rvx-yt
-    ${await fetchAndFormatJson(`${BASHRC_RAW_BASE_URL}/docs/android/rvx-yt.txt`)}
-    \`\`\`
-    \`\`\`rvx-music-yt
-    ${await fetchAndFormatJson(`${BASHRC_RAW_BASE_URL}/docs/android/rvx-yt-music.txt`)}
-    \`\`\`
-    \`\`\`rvx-sponspor-block
-    ${await fetchAndFormatJson(`${BASHRC_RAW_BASE_URL}/docs/android/sponsorblock.json`)}
-    \`\`\`
   `;
 
   // construct and save the data to cache.
   const urlPorterExtra = await urlPorterBookmarksPromise;
   renderSchema(`
     ${_transformSchema(SITE_SCHEMA)}
-    ${_transformSchema(await getAndroidAppsAndNotes())}
+    ${_transformSchema(getAndroidAppsAndNotes())}
     ${_transformSchema(await getUrlPorterSectionForNav())}
     ${_transformSchema(await getUrlPorterAndNavGenSchema())}
     ${_transformSchema(urlPorterExtra)}
