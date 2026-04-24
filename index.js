@@ -220,7 +220,7 @@ document.addEventListener("NavBeforeLoad", async (e) => {
     const ETC_HOST_PATH_OSX = `/etc/hosts`;
 
     try {
-      const IP_ADDRESS_CONFIG = await fetch(`https://github.com/synle/bashrc/blob/head/software/metadata/ip-address.config?raw=1`).then(
+      const IP_ADDRESS_CONFIG = await fetch(`https://github.com/synle/bashrc/blob/HEAD/software/metadata/ip-address.config?raw=1`).then(
         (r) => r.text(),
       );
 
