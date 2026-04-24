@@ -215,49 +215,13 @@ document.addEventListener("NavBeforeLoad", async (e) => {
     return;
   }
 
-  /**
-   * Converts the raw url-porter.json config list into nav-generator link
-   * lines (`from | to`). Filters out entries without a dotted host.
-   * @param {string} urlPorterJson - Raw JSON string from url-porter.json.
-   * @returns {string} Newline-joined link lines, or empty string on error.
-   */
-  function _buildUrlPorterLinkLines(urlPorterJson) {
-    try {
-      const res = JSON.parse(urlPorterJson);
-      return res
-        .map((nav) => {
-          let from, to;
-          if (Array.isArray(nav) && nav.length === 2) {
-            [from, to] = nav;
-          } else {
-            from = nav.from;
-            to = nav.to;
-          }
-          from = (from || "").trim().replace(/^\|\|/, "").replace(/\^$/, "");
-          to = (to || "")
-            .replace(/^https?:\/\//i, "")
-            .replace(/\/$/, "")
-            .trim();
-          try {
-            to = decodeURIComponent(to || "");
-          } catch {}
-          to = to.replace(/^https?:\/\//i, "").trim();
-          return from && to ? [from, to] : [];
-        })
-        .filter((p) => p.length > 0 && p[1].includes("."))
-        .map(([from, to]) => `${from} | ${to}`)
-        .join("\n");
-    } catch {
-      return "";
-    }
-  }
-
   // Build the consolidated "URL Porter & Nav Generator" section.
   // Three tabs at the section level: URL Porter, Nav Gen, IPs.
-  //  - URL Porter (::: nested nav block): all url-porter bookmark links,
-  //    then a *nested* tab bar for Download, MetaData, and the three
-  //    RVX configs. The RVX configs (previously under Android) live
-  //    here now since they share the "tooling content" theme.
+  //  - URL Porter (::: nested nav block): just 3 url-porter management
+  //    links (edit configs / url-porter-edit / url-porter-view) followed
+  //    by a nested tab bar for Download + MetaData. Bookmark grid lives
+  //    elsewhere (getUrlPorterSectionForNav) — only management content
+  //    here.
   //  - Nav Gen (::: nested nav block): Edit Nav Favs / Edit Nav Library
   //    link buttons alongside the combined `git clone` snippets.
   //  - IPs (code block): Windows Hosts / Linux Hosts paths + bashrc
@@ -266,18 +230,12 @@ document.addEventListener("NavBeforeLoad", async (e) => {
     const ETC_HOST_PATH_WIN32 = `c:\\Windows\\System32\\Drivers\\etc\\hosts`;
     const ETC_HOST_PATH_OSX = `/etc/hosts`;
 
-    // Fetch everything in parallel — one round-trip for the whole section.
-    const [ipAddressConfig, urlPorterJson, rvxYt, rvxYtMusic, rvxSponsorblock] = await Promise.all([
+    const [ipAddressConfig, urlPorterJson] = await Promise.all([
       fetch(`${BASHRC_RAW_BASE_URL}/software/metadata/ip-address.config`)
         .then((r) => r.text())
         .catch(() => ""),
       getUrlPorterConfigs(),
-      fetchAndFormatJson(`${BASHRC_RAW_BASE_URL}/docs/android/rvx-yt.txt`),
-      fetchAndFormatJson(`${BASHRC_RAW_BASE_URL}/docs/android/rvx-yt-music.txt`),
-      fetchAndFormatJson(`${BASHRC_RAW_BASE_URL}/docs/android/sponsorblock.json`),
     ]);
-
-    const urlPorterLinkLines = _buildUrlPorterLinkLines(urlPorterJson);
 
     return `
 # URL Porter & Nav Generator
@@ -287,9 +245,10 @@ Host Mapping Ip Config | https://github.com/synle/bashrc/blob/master/software/me
 
 :::tabUrlPorter
 edit url porter configs | https://github.com/synle/fav/blob/main/url-porter.json
-${urlPorterLinkLines}
+url-porter-edit | https://github.com/synle/fav/edit/main/url-porter.json
+url-porter-view | https://github.com/synle/fav/blob/main/url-porter.json
 
->>>Download|tabPortDown>>>MetaData|tabPortMeta>>>RVX YouTube|tabRvxYt>>>RVX YT Music|tabRvxYtMusic>>>RVX Sponsorblock|tabRvxSponsorblock
+>>>Download|tabPortDown>>>MetaData|tabPortMeta
 
 \`\`\`tabPortDown
 #################################################################
@@ -340,18 +299,6 @@ Write-Output "..."
 \`\`\`tabPortMeta
 ${urlPorterJson}
 \`\`\`
-
-\`\`\`tabRvxYt
-${rvxYt}
-\`\`\`
-
-\`\`\`tabRvxYtMusic
-${rvxYtMusic}
-\`\`\`
-
-\`\`\`tabRvxSponsorblock
-${rvxSponsorblock}
-\`\`\`
 :::
 
 :::tabNavGen
@@ -383,10 +330,63 @@ ${ipAddressConfig}
 `;
   }
 
-  // Android apps list. RVX configs previously lived here as a tab block —
-  // they've moved into the URL Porter tab inside the consolidated URL
-  // Porter & Nav Generator section.
-  const getAndroidAppsAndNotes = () => `
+  // Standalone url-porter bookmarks grid (Drive, Calendar, Gmail, etc.).
+  // Decoded from url-porter.json into nav link lines.
+  async function getUrlPorterSectionForNav() {
+    try {
+      const res = JSON.parse(await getUrlPorterConfigs());
+      return `
+
+    # url-porter source code
+    edit url porter configs | https://github.com/synle/fav/blob/main/url-porter.json
+
+    # url-porter bookmarks
+    ${res
+      .map((nav) => {
+        let from = nav.from;
+        let to = nav.to;
+
+        if (Array.isArray(nav) && nav.length === 2) {
+          from = nav[0];
+          to = nav[1];
+        }
+
+        from = (from || "")
+          .trim()
+          .replace(/^\|\|/, "") // remove leading ||
+          .replace(/\^$/, ""); // remove trailing ^
+        to = (to || "")
+          .replace(/^https?:\/\//i, "") // remove http or https
+          .replace(/\/$/, "") // remove trailing slash
+          .trim();
+        // try decoding for readability
+        to = (() => {
+          try {
+            return decodeURIComponent(to || "");
+          } catch {
+            return to || "";
+          }
+        })()
+          .replace(/^https?:\/\//i, "")
+          .trim();
+
+        if (from && to) {
+          return [from, to];
+        }
+
+        return [];
+      })
+      .filter((s) => s.length > 0 && s[1].includes("."))
+      .map(([from, to]) => `${from} | ${to}`)
+      .join("\n")
+      .trim()}
+    `;
+    } catch (err) {}
+    return "";
+  }
+
+  const getAndroidAppsAndNotes = async () =>
+    `
     # Android
     nova Companion | teslacoilapps.com/tesladirect/download.pl?packageName=com.teslacoilsw.launcherclientproxy&betaType=public
     vanced micro g | vanced.to/gmscore-microg
@@ -394,13 +394,27 @@ ${ipAddressConfig}
     vanced YT| vanced.to/revanced-youtube-extended
     vanced YT Music | vanced.to/revanced-youtube-music-extended
     vanced Google News | vanced.to/revanced-google-news
+
+    # Youtube / Youtube Music / Sponsorblock RVX Configs
+    >>>RVX Youtube|rvx-yt>>>RVX Youtube Music|rvx-music-yt>>>RVX Sponsorblock|rvx-sponspor-block
+
+    \`\`\`rvx-yt
+    ${await fetchAndFormatJson(`${BASHRC_RAW_BASE_URL}/docs/android/rvx-yt.txt`)}
+    \`\`\`
+    \`\`\`rvx-music-yt
+    ${await fetchAndFormatJson(`${BASHRC_RAW_BASE_URL}/docs/android/rvx-yt-music.txt`)}
+    \`\`\`
+    \`\`\`rvx-sponspor-block
+    ${await fetchAndFormatJson(`${BASHRC_RAW_BASE_URL}/docs/android/sponsorblock.json`)}
+    \`\`\`
   `;
 
   // construct and save the data to cache.
   const urlPorterExtra = await urlPorterBookmarksPromise;
   renderSchema(`
     ${_transformSchema(SITE_SCHEMA)}
-    ${_transformSchema(getAndroidAppsAndNotes())}
+    ${_transformSchema(await getAndroidAppsAndNotes())}
+    ${_transformSchema(await getUrlPorterSectionForNav())}
     ${_transformSchema(await getUrlPorterAndNavGenSchema())}
     ${_transformSchema(urlPorterExtra)}
   `);
