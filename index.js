@@ -247,9 +247,7 @@ Host Mapping Ip Config | https://github.com/synle/bashrc/blob/master/software/me
 >>>URL Porter|tabUrlPorter>>>RVX|tabRvx>>>Nav Gen|tabNavGen>>>IPs|tabIps
 
 :::tabUrlPorter
-edit url porter configs | https://github.com/synle/fav/blob/main/url-porter.json
-url-porter-edit | https://github.com/synle/fav/edit/main/url-porter.json
-url-porter-view | https://github.com/synle/fav/blob/main/url-porter.json
+Edit URL Porter Configs | https://github.com/synle/fav/edit/main/url-porter.json
 
 >>>Download|tabPortDown>>>MetaData|tabPortMeta
 
