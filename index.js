@@ -215,46 +215,27 @@ document.addEventListener("NavBeforeLoad", async (e) => {
     return;
   }
 
-  async function getHostMappingSchema() {
-    let HOST_MAPPING_BLOCK_SCHEMA = "";
-
+  // Build the consolidated "URL Porter & Nav Generator" section.
+  // Four tabs: URL Port Download, URL Port MetaData, Nav Gen, IPs.
+  //  - Nav Gen uses a `:::` nested nav block so Edit Nav Favs / Edit Nav
+  //    Library render as clickable nav buttons alongside the combined
+  //    `git clone` snippets.
+  //  - IPs fuses the old Windows Hosts / Linux Hosts / IPs tabs into a
+  //    single code block with inline labels.
+  async function getUrlPorterAndNavGenSchema() {
     const ETC_HOST_PATH_WIN32 = `c:\\Windows\\System32\\Drivers\\etc\\hosts`;
     const ETC_HOST_PATH_OSX = `/etc/hosts`;
 
+    let IP_ADDRESS_CONFIG = "";
     try {
-      const IP_ADDRESS_CONFIG = await fetch(`${BASHRC_RAW_BASE_URL}/software/metadata/ip-address.config`).then((r) => r.text());
-
-      HOST_MAPPING_BLOCK_SCHEMA = `
-
-      # Host Mappings
-      Host Mapping Ip Config|https://github.com/synle/bashrc/blob/master/software/metadata/ip-address.config
-      >>> Windows Hosts|tabHostDirWindow >>> Linux Hosts|tabHostDirLinux  >>> IPs|tabHostNamesGroupedByIp
-      \`\`\`tabHostDirWindow
-      ${ETC_HOST_PATH_WIN32}
-      \`\`\`
-
-      \`\`\`tabHostDirLinux
-      ${ETC_HOST_PATH_OSX}
-      \`\`\`
-
-      \`\`\`tabHostNamesGroupedByIp
-      ${IP_ADDRESS_CONFIG}
-      \`\`\`
-    `
-        .split("\n")
-        .map((s) => s.trim())
-        .join("\n");
+      IP_ADDRESS_CONFIG = await fetch(`${BASHRC_RAW_BASE_URL}/software/metadata/ip-address.config`).then((r) => r.text());
     } catch (err) {}
 
-    return HOST_MAPPING_BLOCK_SCHEMA;
-  }
-
-  let URL_PORTER_NOTES = `
+    return `
 # URL Porter & Nav Generator
-edit nav favs | github.com/synle/fav/edit/main/index.js
-edit nav library | github.com/synle/nav-generator
+Host Mapping Ip Config | https://github.com/synle/bashrc/blob/master/software/metadata/ip-address.config
 
->>>URL Port Download|tabUrlPorterDownload>>>URL Port MetaData|tabUrlPorterMetaData>>>Nav Gen Fav|nav-fav>>>Nav Gen Generator|nav-generator>>>Nav Gen Template|nav-template
+>>>URL Port Download|tabUrlPorterDownload>>>URL Port MetaData|tabUrlPorterMetaData>>>Nav Gen|tabNavGen>>>IPs|tabIps
 
 \`\`\`tabUrlPorterDownload
 #################################################################
@@ -306,18 +287,34 @@ Write-Output "..."
 ${await getUrlPorterConfigs()}
 \`\`\`
 
-\`\`\`nav-fav
+:::tabNavGen
+edit nav favs | github.com/synle/fav/edit/main/index.js
+edit nav library | github.com/synle/nav-generator
+
+\`\`\`
+# Nav Gen Fav
 git clone git@github.com:synle/fav.git
-\`\`\`
 
-\`\`\`nav-generator
+# Nav Gen Generator
 git clone git@github.com:synle/nav-generator.git
-\`\`\`
 
-\`\`\`nav-template
+# Nav Gen Template
 git clone git@github.com:synle/nav-generator-template.git
 \`\`\`
+:::
+
+\`\`\`tabIps
+# Windows Hosts
+${ETC_HOST_PATH_WIN32}
+
+# Linux Hosts
+${ETC_HOST_PATH_OSX}
+
+# IPs
+${IP_ADDRESS_CONFIG}
+\`\`\`
 `;
+  }
 
   async function getUrlPorterSectionForNav() {
     try {
@@ -402,8 +399,7 @@ git clone git@github.com:synle/nav-generator-template.git
     ${_transformSchema(SITE_SCHEMA)}
     ${_transformSchema(await getAndroidAppsAndNotes())}
     ${_transformSchema(await getUrlPorterSectionForNav())}
-    ${_transformSchema(await getHostMappingSchema())}
-    ${_transformSchema(URL_PORTER_NOTES)}
+    ${_transformSchema(await getUrlPorterAndNavGenSchema())}
     ${_transformSchema(urlPorterExtra)}
   `);
 });
