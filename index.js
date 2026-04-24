@@ -220,18 +220,15 @@ document.addEventListener("NavBeforeLoad", async (e) => {
     const ETC_HOST_PATH_OSX = `/etc/hosts`;
 
     try {
-      const HOSTNAMES_GROUPED_BY_ID = await fetch(
-        `https://github.com/synle/bashrc/blob/head/.build/ip-address.config.hostnamesGroupedByID?raw=1`,
-      ).then((r) => r.text());
-      const HOSTNAMES_MAPPINGS = await fetch(
-        `https://github.com/synle/bashrc/blob/head/.build/ip-address.config.etcHostnamesMappings?raw=1`,
+      const IP_ADDRESS_CONFIG = await fetch(
+        `https://github.com/synle/bashrc/blob/head/software/metadata/ip-address.config?raw=1`,
       ).then((r) => r.text());
 
       HOST_MAPPING_BLOCK_SCHEMA = `
 
       # Host Mappings
       Host Mapping Ip Config|https://github.com/synle/bashrc/blob/master/software/metadata/ip-address.config
-      >>> Windows Hosts|tabHostDirWindow >>> Linux Hosts|tabHostDirLinux  >>> IPs|tabHostNamesGroupedByIp >>> /etc/hosts|tabHostMappings
+      >>> Windows Hosts|tabHostDirWindow >>> Linux Hosts|tabHostDirLinux  >>> IPs|tabHostNamesGroupedByIp
       \`\`\`tabHostDirWindow
       ${ETC_HOST_PATH_WIN32}
       \`\`\`
@@ -241,15 +238,7 @@ document.addEventListener("NavBeforeLoad", async (e) => {
       \`\`\`
 
       \`\`\`tabHostNamesGroupedByIp
-      ${HOSTNAMES_GROUPED_BY_ID}
-      \`\`\`
-
-      \`\`\`tabHostMappings
-      # subl ${ETC_HOST_PATH_WIN32}
-      # sudo vim ${ETC_HOST_PATH_OSX}
-      # Sy Home Hosts
-      ${HOSTNAMES_MAPPINGS}
-      # END Sy Home Hosts
+      ${IP_ADDRESS_CONFIG}
       \`\`\`
     `
         .split("\n")
