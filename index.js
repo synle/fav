@@ -215,16 +215,19 @@ document.addEventListener("NavBeforeLoad", async (e) => {
     return;
   }
 
-  // Build the consolidated "URL Porter & Nav Generator" section.
+  // Build the consolidated "Tools & Configs" section.
   // Four tabs at the section level: URL Porter, RVX, Nav Generator, IP.
-  //  - URL Porter (::: nested nav block): an Edit URL Porter Configs link
-  //    followed by a nested tab bar for Download + MetaData. Bookmark
-  //    grid lives elsewhere (getUrlPorterSectionForNav).
+  // Tab definitions use short-form (just the label, no `|tabId`) — content
+  // blocks (`:::Label` / ` ```Label `) bind by matching label string.
+  //  - URL Porter (::: nested nav block): Edit / View URL Porter Configs
+  //    links followed by a nested tab bar for Download + MetaData.
+  //    Bookmark grid lives elsewhere (getUrlPorterSectionForNav).
   //  - RVX (::: nested nav block): nested tab bar for the three RVX
   //    config files (Youtube / Youtube Music / Sponsorblock).
   //  - Nav Generator (::: nested nav block): Edit Nav Favs / Edit Nav
   //    Library link buttons alongside the combined `git clone` snippets.
-  //  - IP (code block): Windows Hosts / Linux Hosts paths + bashrc
+  //  - IP (::: nested nav block): Host Mapping Ip Config link followed
+  //    by a code block of Windows Hosts / Linux Hosts paths + bashrc
   //    ip-address.config content, fused with inline labels.
   async function getUrlPorterAndNavGenSchema() {
     const ETC_HOST_PATH_WIN32 = `c:\\Windows\\System32\\Drivers\\etc\\hosts`;
@@ -241,17 +244,17 @@ document.addEventListener("NavBeforeLoad", async (e) => {
     ]);
 
     return `
-# URL Porter & Nav Generator
-Host Mapping Ip Config | https://github.com/synle/bashrc/blob/master/software/metadata/ip-address.config
+# Tools & Configs
 
->>>URL Porter|tabUrlPorter>>>RVX Youtube / Music / Sponsorblock|tabRvx>>>Fav / Nav Generator|tabNavGen>>>IP|tabIps
+>>>URL Porter>>>RVX Youtube / Music / Sponsorblock>>>Fav / Nav Generator>>>IP
 
-:::tabUrlPorter
+:::URL Porter
 Edit URL Porter Configs | https://github.com/synle/fav/edit/main/url-porter.json
+View URL Porter Configs | https://github.com/synle/fav/blob/main/url-porter.json
 
->>>Download|tabPortDown>>>MetaData|tabPortMeta
+>>>Download>>>MetaData
 
-\`\`\`tabPortDown
+\`\`\`Download
 #################################################################
 ################## for Mac OSX with bash ##################
 #################################################################
@@ -297,28 +300,28 @@ if (Test-Path $BASE) {
 Write-Output "..."
 \`\`\`
 
-\`\`\`tabPortMeta
+\`\`\`MetaData
 ${urlPorterJson}
 \`\`\`
 :::
 
-:::tabRvx
->>>Youtube RVX|tabRvxYt>>>Youtube Music RVX|tabRvxYtMusic>>>Sponsorblock RVX|tabRvxSponsorblock
+:::RVX Youtube / Music / Sponsorblock
+>>>Youtube RVX>>>Youtube Music RVX>>>Sponsorblock RVX
 
-\`\`\`tabRvxYt
+\`\`\`Youtube RVX
 ${rvxYt}
 \`\`\`
 
-\`\`\`tabRvxYtMusic
+\`\`\`Youtube Music RVX
 ${rvxYtMusic}
 \`\`\`
 
-\`\`\`tabRvxSponsorblock
+\`\`\`Sponsorblock RVX
 ${rvxSponsorblock}
 \`\`\`
 :::
 
-:::tabNavGen
+:::Fav / Nav Generator
 Edit Fav | github.com/synle/fav/edit/main/index.js
 Edit Nav Library Code | github.com/synle/nav-generator
 
@@ -334,7 +337,10 @@ git clone git@github.com:synle/nav-generator-template.git
 \`\`\`
 :::
 
-\`\`\`tabIps
+:::IP
+Host Mapping Ip Config | https://github.com/synle/bashrc/blob/master/software/metadata/ip-address.config
+
+\`\`\`
 # Windows Hosts
 ${ETC_HOST_PATH_WIN32}
 
@@ -344,6 +350,7 @@ ${ETC_HOST_PATH_OSX}
 # IP
 ${ipAddressConfig}
 \`\`\`
+:::
 `;
   }
 
@@ -353,9 +360,6 @@ ${ipAddressConfig}
     try {
       const res = JSON.parse(await getUrlPorterConfigs());
       return `
-
-    # url-porter source code
-    edit url porter configs | https://github.com/synle/fav/blob/main/url-porter.json
 
     # url-porter bookmarks
     ${res

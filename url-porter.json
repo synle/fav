@@ -41,8 +41,6 @@
     ["linkedin", "https://www.linkedin.com/feed"],
     ["codespaces", "https://github.com/codespaces"],
     ["codespace", "https://symmetrical-yodel-wgj5q7xj69c5475.github.dev"],
-    ["prettier", "https://prettier.io/playground"],
-    ["url-porter-edit", "https://github.com/synle/fav/edit/main/url-porter.json"],
-    ["url-porter-view", "https://github.com/synle/fav/blob/main/url-porter.json"]
+    ["prettier", "https://prettier.io/playground"]
   ]
 }
