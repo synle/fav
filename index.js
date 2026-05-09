@@ -57,6 +57,24 @@ const SITE_SCHEMA = `
   email | mail.google.com/mail
   calendar | calendar.google.com/calendar
 
+  # Work - Linkedin
+
+  >>>tde
+
+  :::tde
+  commits fe | go/tde/commits/fe
+  commits be | go/tde/commits/be
+  commits agent | go/tde/commits/agent
+  deploy fe | go/tde/deploy/fe
+  deploy be | go/tde/deploy/be
+  deploy agent | go/tde/deploy/agent
+  temporal dev | tde/temporal/dev
+  temporal stage | go/tde/temporal/stage
+  temporal prod | go/tde/temporal/prod
+  app stage | go/tde/app/stage
+  app prod | go/tde/app/prod
+  :::
+
   # dev
   github repositories | github.com/synle?tab=repositories
   code spaces | github.com/codespaces
