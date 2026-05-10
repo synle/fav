@@ -62,17 +62,18 @@ const SITE_SCHEMA = `
   >>>tde
 
   :::tde
-  commits fe | go/tde/commits/fe
-  commits be | go/tde/commits/be
-  commits agent | go/tde/commits/agent
-  deploy fe | go/tde/deploy/fe
-  deploy be | go/tde/deploy/be
-  deploy agent | go/tde/deploy/agent
-  temporal dev | tde/temporal/dev
-  temporal stage | go/tde/temporal/stage
-  temporal prod | go/tde/temporal/prod
-  app stage | go/tde/app/stage
-  app prod | go/tde/app/prod
+  commits fe | http://go/tde/commits/fe
+  commits be | http://go/tde/commits/be
+  commits agent | http://go/tde/commits/agent
+  deploy fe | http://go/tde/deploy/fe
+  deploy be | http://go/tde/deploy/be
+  deploy agent | http://go/tde/deploy/agent
+  temporal local | http://localhost:8233
+  temporal stage | http://go/tde/temporal/stage
+  temporal prod | http://go/tde/temporal/prod
+  app local | http://localhost:3000
+  app stage | http://go/tde/app/stage
+  app prod | http://go/tde/app/prod
   :::
 
   # dev
