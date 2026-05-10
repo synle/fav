@@ -69,6 +69,7 @@ const SITE_SCHEMA = `
   deploy be | http://go/tde/deploy/be
   deploy agent | http://go/tde/deploy/agent
   temporal local | http://localhost:8233
+  temporal dev | https://go/tde/temporal/dev
   temporal stage | http://go/tde/temporal/stage
   temporal prod | http://go/tde/temporal/prod
   app local | http://localhost:3000
