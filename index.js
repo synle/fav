@@ -58,11 +58,9 @@ const SITE_SCHEMA = `
   email | mail.google.com/mail
   calendar | calendar.google.com/calendar
 
-  # Work - Linkedin
+  >>>Linkedin TDE
 
-  >>>tde
-
-  :::tde
+  :::Linkedin TDE
   commits fe | http://go/tde/commits/fe
   commits be | http://go/tde/commits/be
   commits agent | http://go/tde/commits/agent
