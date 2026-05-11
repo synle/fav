@@ -42,6 +42,7 @@ const SITE_SCHEMA = `
   netflix | netflix.com
   disney+ | disneyplus.com
   prime video | amazon.com/gp/video
+  crunchyroll | crunchyroll.com
 
   # UT Austin School
   Canvas | canvas.utexas.edu
