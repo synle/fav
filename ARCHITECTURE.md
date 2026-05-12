@@ -49,7 +49,7 @@ service worker, search-as-launcher) lives in `synle/nav-generator`.
   Porter bookmarks + URL-Porter / RVX / Nav-Generator / IP tabbed "Tools &
   Configs" section + extension-injected bookmarks).
 - `url-porter.json` — URL Porter Chrome extension config: `{ homepage,
-  configs: [[alias, url], ...], bookmarkRules?, ... }`. Loaded at runtime
+configs: [[alias, url], ...], bookmarkRules?, ... }`. Loaded at runtime
   via `fetch("https://synle.github.io/fav/url-porter.json")`.
 - `url-porter.clean-config.js` — Node script invoked by `build.sh`. Reads
   `url-porter.json`, strips comments, normalizes each entry into a
