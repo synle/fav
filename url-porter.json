@@ -6,7 +6,7 @@
     ["gmail", "https://mail.google.com/mail/u/0/#inbox"],
     ["outlook", "https://outlook.office.com"],
     ["plex", "http://192.168.1.22:32400/web/index.html"],
-    ["jf", "http://192.168.1.45:8096/"],
+    ["jf", "http://192.168.1.45:8096"],
     ["jellyfin", "http://jf"],
     ["edx", "https://edstem.org/us/dashboard"],
     ["canvas", "https://utexas.instructure.com"],
