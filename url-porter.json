@@ -6,7 +6,7 @@
     ["gmail", "https://mail.google.com/mail/u/0/#inbox"],
     ["outlook", "https://outlook.office.com"],
     ["plex", "http://192.168.1.22:32400/web/index.html"],
-    ["jf", "http://192.168.1.22:8096"],
+    ["jf", "http://192.168.1.45:8096/"],
     ["jellyfin", "http://jf"],
     ["edx", "https://edstem.org/us/dashboard"],
     ["canvas", "https://utexas.instructure.com"],
@@ -41,6 +41,16 @@
     ["linkedin", "https://www.linkedin.com/feed"],
     ["codespaces", "https://github.com/codespaces"],
     ["codespace", "https://symmetrical-yodel-wgj5q7xj69c5475.github.dev"],
-    ["prettier", "https://prettier.io/playground"]
-  ]
+    ["prettier", "https://prettier.io/playground"],
+    ["url-porter-edit", "https://github.com/synle/fav/edit/main/url-porter.json"],
+    ["url-porter-view", "https://github.com/synle/fav/blob/main/url-porter.json"]
+  ],
+  "bookmarkRules": [],
+  "bookmarkFolderName": "url-porter",
+  "historyAliasLimit": 5000,
+  "historyEntryLimit": 20,
+  "githubOrgThreshold": 3,
+  "statsVisitThreshold": 3,
+  "statsMaxResults": 200,
+  "statsLookbackMonths": 6
 }
