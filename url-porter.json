@@ -44,7 +44,7 @@
     ["prettier", "https://prettier.io/playground"],
     ["url-porter-edit", "https://github.com/synle/fav/edit/main/url-porter.json"],
     ["url-porter-view", "https://github.com/synle/fav/blob/main/url-porter.json"],
-    ["sunshine", "https://192.168.1.45:47990"],
+    ["sunshine", "https://192.168.1.45:47990"]
   ],
   "bookmarkRules": [],
   "bookmarkFolderName": "url-porter",
