@@ -35,7 +35,10 @@
     ["appletv", "https://tv.apple.com"],
     ["disney+", "https://www.disneyplus.com/home"],
     ["netflix", "https://www.netflix.com/browse"],
-    ["primevideo", "https://www.amazon.com/amazon-video/b/?&node=2858778011&ref=dvm_mlp_rowna_us_1"],
+    [
+      "primevideo",
+      "https://www.amazon.com/amazon-video/b/?&node=2858778011&ref=dvm_mlp_rowna_us_1"
+    ],
     ["fb", "https://www.facebook.com"],
     ["facebook", "https://www.facebook.com"],
     ["linkedin", "https://www.linkedin.com/feed"],
