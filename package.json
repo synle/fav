@@ -3,20 +3,21 @@
   "version": "1.2.0",
   "private": true,
   "description": "synle-fav",
-  "devDependencies": {
-    "prettier": "^3.8.1"
-  },
-  "scripts": {
-    "clean": "rm -f index.html import-map.json .prettier-cache",
-    "build": "bash build.sh",
-    "format": "prettier --write --cache --ignore-unknown --no-error-on-unmatched-pattern --print-width 140 .",
-    "dev": "bash dev.sh",
-    "start": "npx http-server --cors -a 127.0.0.1 ."
-  },
   "keywords": [
-    "Sy",
-    "Le"
+    "Le",
+    "Sy"
   ],
+  "license": "ISC",
   "author": "Sy Le",
-  "license": "ISC"
+  "scripts": {
+    "clean": "rm -f index.html import-map.json .oxfmt-cache",
+    "build": "bash build.sh",
+    "format": "oxfmt --write .",
+    "dev": "bash dev.sh",
+    "start": "npx http-server --cors -a 127.0.0.1 .",
+    "format:check": "oxfmt --check ."
+  },
+  "devDependencies": {
+    "oxfmt": "^0.61.0"
+  }
 }
