@@ -234,20 +234,11 @@ document.addEventListener("NavBeforeLoad", async (e) => {
     return;
   }
 
-  // Build the consolidated "Tools & Configs" section.
-  // Four tabs at the section level: URL Porter, RVX, Nav Generator, IP.
-  // Tab definitions use short-form (just the label, no `|tabId`) — content
-  // blocks (`:::Label` / ` ```Label `) bind by matching label string.
-  //  - URL Porter (::: nested nav block): Edit / View URL Porter Configs
-  //    links followed by a nested tab bar for Download + MetaData.
-  //    Bookmark grid lives elsewhere (getUrlPorterSectionForNav).
-  //  - RVX (::: nested nav block): nested tab bar for the three RVX
-  //    config files (Youtube / Youtube Music / Sponsorblock).
-  //  - Nav Generator (::: nested nav block): Edit Nav Favs / Edit Nav
-  //    Library link buttons alongside the combined `git clone` snippets.
-  //  - IP (::: nested nav block): Host Mapping Ip Config link followed
-  //    by a code block of Windows Hosts / Linux Hosts paths + bashrc
-  //    ip-address.config content, fused with inline labels.
+  // "Tools & Configs": four ::: nested tabs (URL Porter, RVX, Nav
+  // Generator, IP), bound by label. URL Porter adds Download/Metadata
+  // sub-tabs; its bookmark grid lives in getUrlPorterSectionForNav.
+  // RVX: the three RVX config files. Nav Generator: edit links + clone
+  // snippets. IP: host paths + bashrc ip-address.config content.
   async function getUrlPorterAndNavGenSchema() {
     const ETC_HOST_PATH_WIN32 = `c:\\Windows\\System32\\Drivers\\etc\\hosts`;
     const ETC_HOST_PATH_OSX = `/etc/hosts`;
@@ -373,8 +364,7 @@ ${ipAddressConfig}
 `;
   }
 
-  // Standalone url-porter bookmarks grid (Drive, Calendar, Gmail, etc.).
-  // Decoded from url-porter.json into nav link lines.
+  // Standalone url-porter bookmarks grid, decoded from url-porter.json.
   async function getUrlPorterSectionForNav() {
     try {
       const res = JSON.parse(await getUrlPorterConfigs());
@@ -425,8 +415,7 @@ ${ipAddressConfig}
     return "";
   }
 
-  // Android apps list. RVX tab block previously lived here — it has
-  // moved into the RVX tab inside the URL Porter & Nav Generator section.
+  // Android apps list.
   const getAndroidAppsAndNotes = () => `
     # Android
     nova Companion | teslacoilapps.com/tesladirect/download.pl?packageName=com.teslacoilsw.launcherclientproxy&betaType=public
