@@ -15,7 +15,7 @@ Static single-page bookmarks launcher at https://synle.github.io/fav/. No backen
 - `index.js` — The source of truth: `SITE_SCHEMA` (nav mini-DSL), `getStrongPassword`, and the `NavBeforeLoad` handler composing the final schema.
 - `index.html` — Generated shell. Never hand-edit; `npm run build`.
 - `url-porter.json` — URL Porter extension config: `{ homepage, configs: [[alias, url], ...], bookmarkRules?, ... }`.
-- `url-porter.clean-config.js` — Strips comments from `url-porter.json`, normalizes entries into lowercase `[from, to]` pairs, dedupes, rewrites in place. Preserves optional keys.
+- `url-porter.clean-config.js` — Strips comments from `url-porter.json`, normalizes entries into `[alias, url]` pairs (lowercased alias, `http://` prefix when scheme missing, trailing slashes removed), dedupes, rewrites in place. Preserves optional keys.
 - `build.sh` — Downloads `index.html` + `dev.sh` templates from nav-generator, runs the cleaner. Idempotent.
 - `dev.sh` — curl'd watcher/server script from `synle/workflows`; watches `*.json *.scss *.jsx *.js`, runs `npm start`.
 - `.github/workflows/` — Thin wrappers around reusable workflows in `synle/workflows`.

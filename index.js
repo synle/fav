@@ -426,7 +426,8 @@ ${ipAddressConfig}
     vanced Google News | vanced.to/revanced-google-news
   `;
 
-  // construct and save the data to cache.
+  // Wait for extension-injected bookmarks (or 2s timeout), then render
+  // the full schema.
   const urlPorterExtra = await urlPorterBookmarksPromise;
   renderSchema(`
     ${_transformSchema(SITE_SCHEMA)}
