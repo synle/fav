@@ -1,4 +1,11 @@
-/** Cleans and normalizes a url-porter JSON config file for import. */
+/**
+ * Cleans url-porter.json in place.
+ * In: raw JSONC (line and block comments allowed).
+ * Out: { homepage, configs: [[alias, url], ...] } — aliases trimmed,
+ * lowercased, stripped of || and ^; URLs get an http:// prefix when the
+ * scheme is missing and trailing slashes removed; duplicates dropped;
+ * optional settings preserved.
+ */
 const fs = require("fs");
 
 const INPUT_FILE = "url-porter.json";
