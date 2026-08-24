@@ -20,6 +20,7 @@ function getStrongPassword(isAlphaNumericOnly = false) {
 Why: false positive. The function is called by the nav-generator runtime when a user clicks schema links like `strong password | javascript://getStrongPassword()` (`index.js:92-93`). Static analysis cannot see that call path.
 
 Proper fix options (pick one):
+
 - Attach the function to `window` / globalThis explicitly so the intent ("exported to runtime") is visible, and drop the comment.
 - Configure oxlint with a globals/allowlist entry for functions referenced from schema strings.
 - Move password generation into nav-generator and reference it by URL.
