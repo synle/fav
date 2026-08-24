@@ -17,3 +17,5 @@ npm ci || npm install --no-fund --prefer-offline
 | `npm run build`        | Regenerates `index.html` via `build.sh`                   |
 | `npm run format`       | Format with oxfmt                                         |
 | `npm run format:check` | Check formatting only                                     |
+| `npm run lint`         | Lint with oxlint                                          |
+| `npm run lint:fix`     | Lint and auto-fix                                         |
