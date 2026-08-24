@@ -114,10 +114,13 @@ async function getUrlPorterConfigs() {
     const data = await r.json();
     return JSON.stringify(data.configs ?? [], null, 2);
   } catch {
+    // Config unreachable or invalid — render an empty URL Porter section.
     return "[]";
   }
 }
 
+// Pretty-prints JSON when the payload parses; passes raw text through
+// otherwise (config files on bashrc may be non-JSON); "" when unreachable.
 async function fetchAndFormatJson(url) {
   try {
     const r = await fetch(url);
@@ -133,9 +136,6 @@ async function fetchAndFormatJson(url) {
   }
 }
 
-// Invoked at runtime from SITE_SCHEMA links (`javascript://getStrongPassword()`),
-// not statically referenced.
-// oxlint-disable-next-line no-unused-vars
 function getStrongPassword(isAlphaNumericOnly = false) {
   function _getRandomInt(min, max) {
     min = Math.ceil(min);
@@ -168,8 +168,10 @@ function getStrongPassword(isAlphaNumericOnly = false) {
     `.replace(/[ \n\t]/g, "");
   }
 
+  // Inclusive range [min, max] — caller passes length - 1 so a pick can
+  // never be out of bounds (an "" append would stall the growth loop).
   function _getRandomOption(choices) {
-    return choices[_getRandomInt(0, choices.length)] || "";
+    return choices[_getRandomInt(0, choices.length - 1)];
   }
 
   function _getPassword(minLength = 20) {
@@ -190,9 +192,7 @@ function getStrongPassword(isAlphaNumericOnly = false) {
     choices = [...new Set(choices)];
 
     while (password.length < minLength) {
-      try {
-        password += _getRandomOption(choices);
-      } catch {}
+      password += _getRandomOption(choices);
     }
     return password;
   }
@@ -203,10 +203,15 @@ function getStrongPassword(isAlphaNumericOnly = false) {
   document.dispatchEvent(eventAppCopyTextToClipboard);
 }
 
+// Exposed for SITE_SCHEMA links (`javascript://getStrongPassword()`), which
+// the nav-generator evaluates at page runtime — invisible to static analysis.
+window.getStrongPassword = getStrongPassword;
+
 // URL Porter bookmark injection from Chrome extension content script
 const urlPorterBookmarksPromise = new Promise((resolve) => {
   document.addEventListener("urlPorterBookmarks", (e) => {
     const bookmarks = e.detail || [];
+    // Diagnostics for extension-injected bookmark payloads.
     console.log("URL Porter bookmarks:", bookmarks);
     if (bookmarks.length === 0) {
       resolve("");
@@ -392,7 +397,7 @@ ${ipAddressConfig}
           .replace(/^https?:\/\//i, "") // remove http or https
           .replace(/\/$/, "") // remove trailing slash
           .trim();
-        // try decoding for readability
+        // Decode percent-encoding for readability; keep raw on malformed input.
         to = (() => {
           try {
             return decodeURIComponent(to || "");
@@ -414,7 +419,9 @@ ${ipAddressConfig}
       .join("\n")
       .trim()}
     `;
-    } catch {}
+    } catch {
+      // url-porter.json unavailable or malformed — omit the bookmarks grid.
+    }
     return "";
   }
 
