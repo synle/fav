@@ -22,7 +22,7 @@ Static single-page bookmarks launcher at https://synle.github.io/fav/. No backen
 
 ## Build & Release
 
-1. `npm ci` — installs oxfmt (only dev dep).
+1. `npm ci` — installs oxfmt (formatter) + oxlint (linter), only dev deps.
 2. `npm run build` — regenerates `index.html`, refreshes `dev.sh`, cleans `url-porter.json`.
 
 CI (push/PR to main): `build-and-commit-sh.yml@main` runs `build.sh`, commits drift back, deploys GitHub Pages. PR close: artifact cleanup workflow.

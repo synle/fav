@@ -133,6 +133,9 @@ async function fetchAndFormatJson(url) {
   }
 }
 
+// Invoked at runtime from SITE_SCHEMA links (`javascript://getStrongPassword()`),
+// not statically referenced.
+// oxlint-disable-next-line no-unused-vars
 function getStrongPassword(isAlphaNumericOnly = false) {
   function _getRandomInt(min, max) {
     min = Math.ceil(min);
@@ -189,7 +192,7 @@ function getStrongPassword(isAlphaNumericOnly = false) {
     while (password.length < minLength) {
       try {
         password += _getRandomOption(choices);
-      } catch (err) {}
+      } catch {}
     }
     return password;
   }
@@ -411,7 +414,7 @@ ${ipAddressConfig}
       .join("\n")
       .trim()}
     `;
-    } catch (err) {}
+    } catch {}
     return "";
   }
 
