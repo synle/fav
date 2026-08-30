@@ -1,6 +1,7 @@
 {
   "homepage": "https://synle.github.io/fav/",
   "configs": [
+    ["synle/repo", "https://github.com/synle?tab=repositories"]
     ["drive", "https://drive.google.com"],
     ["calendar", "https://calendar.google.com"],
     ["gmail", "https://mail.google.com/mail/u/0/#inbox"],
