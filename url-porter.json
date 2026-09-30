@@ -50,7 +50,7 @@
     ["url-porter-view", "https://github.com/synle/fav/blob/main/url-porter.json"],
     ["sunshine", "https://192.168.1.45:47990"],
     ["ollama", "http://192.168.1.45:11434/api/tags"],
-    ["textserver", "http://192.168.1.23:9998/"]
+    ["textserver", "http://192.168.1.23:9998"]
   ],
   "bookmarkRules": [],
   "bookmarkFolderName": "url-porter",
