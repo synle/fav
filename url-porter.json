@@ -58,7 +58,7 @@
     ["amazon", "https://www.amazon.com"],
     ["ebay", "https://www.ebay.com"],
     ["sd", "https://slickdeals.net/"],
-    ["reddit", "https://www.reddit.com/"],
+    ["reddit", "https://www.reddit.com/"]
   ],
   "bookmarkRules": [],
   "bookmarkFolderName": "url-porter",
