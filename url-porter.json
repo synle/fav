@@ -56,7 +56,9 @@
     ["text-server", "http://textserver"],
     ["textserver", "http://192.168.1.23:9998"],
     ["amazon", "https://www.amazon.com"],
-    ["ebay", "https://www.ebay.com"]
+    ["ebay", "https://www.ebay.com"],
+    ["sd", "https://slickdeals.net/"],
+    ["reddit", "https://www.reddit.com/"],
   ],
   "bookmarkRules": [],
   "bookmarkFolderName": "url-porter",
