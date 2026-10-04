@@ -55,8 +55,8 @@
     ["copyserver", "http://textserver"],
     ["text-server", "http://textserver"],
     ["textserver", "http://192.168.1.23:9998"],
-    ["amazon", "https://www.amazon.com/"],
-    ["ebay", "https://www.ebay.com/"]
+    ["amazon", "https://www.amazon.com"],
+    ["ebay", "https://www.ebay.com"]
   ],
   "bookmarkRules": [],
   "bookmarkFolderName": "url-porter",
