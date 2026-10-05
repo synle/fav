@@ -1,5 +1,5 @@
 /**
- * Cleans url-porter.json in place.
+ * Cleans url-porter.jsonc in place.
  * In: raw JSONC (line and block comments allowed).
  * Out: { homepage, configs: [[alias, url], ...] } — aliases trimmed,
  * lowercased, stripped of || and ^; URLs get an http:// prefix when the
@@ -8,18 +8,21 @@
  */
 const fs = require("fs");
 
-const INPUT_FILE = "url-porter.json";
+const INPUT_FILE = "url-porter.jsonc";
 const OUTPUT_FILE = INPUT_FILE;
 const DEFAULT_HOME_PAGE = "https://synle.github.io/fav/";
 
 try {
   const rawData = fs.readFileSync(INPUT_FILE, "utf8");
 
-  // Strip comments (single-line // and multi-line /* */) so JSON.parse works
-  const jsonWithoutComments = rawData.replace(
+  // Strip comments (single-line // and multi-line /* */)
+  let jsonWithoutComments = rawData.replace(
     /\\"|"(?:\\"|[^"])*"|(\/\/.*|\/\*[\s\S]*?\*\/)/g,
     (m, g) => (g ? "" : m),
   );
+  // Strip trailing commas (JSONC)
+  jsonWithoutComments = jsonWithoutComments.replace(/,(\s*[}\]])/g, "$1");
+
   const parsedData = JSON.parse(jsonWithoutComments);
 
   // Support both { configs: [...] } and bare array formats
@@ -103,11 +106,6 @@ try {
   }
   if (typeof parsedData.statsLookbackMonths === "number" && parsedData.statsLookbackMonths >= 1) {
     result.statsLookbackMonths = parsedData.statsLookbackMonths;
-  }
-
-  console.log(JSON.stringify(result, null, 2));
-  if (duplicatesRemoved > 0) {
-    console.log(`\nRemoved ${duplicatesRemoved} duplicate(s).`);
   }
 
   fs.writeFileSync(OUTPUT_FILE, JSON.stringify(result, null, 2), "utf8");

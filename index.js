@@ -110,7 +110,7 @@ function _transformSchema(s) {
 
 async function getUrlPorterConfigs() {
   try {
-    const r = await fetch("https://synle.github.io/fav/url-porter.json");
+    const r = await fetch("https://synle.github.io/fav/url-porter.jsonc");
     const data = await r.json();
     return JSON.stringify(data.configs ?? [], null, 2);
   } catch {
@@ -267,8 +267,8 @@ document.addEventListener("NavBeforeLoad", async (e) => {
 >>>URL Porter>>>RVX Youtube / Music / Sponsorblock>>>Fav / Nav Generator>>>IP
 
 :::URL Porter
-Edit URL Porter Configs | https://github.com/synle/fav/edit/main/url-porter.json
-View URL Porter Configs | https://github.com/synle/fav/blob/main/url-porter.json
+Edit URL Porter Configs | https://github.com/synle/fav/edit/main/url-porter.jsonc
+View URL Porter Configs | https://github.com/synle/fav/blob/main/url-porter.jsonc
 
 >>>Download>>>MetaData
 
@@ -372,7 +372,7 @@ ${ipAddressConfig}
 `;
   }
 
-  // Standalone url-porter bookmarks grid, decoded from url-porter.json.
+  // Standalone url-porter bookmarks grid, decoded from url-porter.jsonc.
   async function getUrlPorterSectionForNav() {
     try {
       const res = JSON.parse(await getUrlPorterConfigs());
@@ -420,7 +420,7 @@ ${ipAddressConfig}
       .trim()}
     `;
     } catch {
-      // url-porter.json unavailable or malformed — omit the bookmarks grid.
+      // url-porter.jsonc unavailable or malformed — omit the bookmarks grid.
     }
     return "";
   }
