@@ -59,7 +59,7 @@
     ["ebay", "https://www.ebay.com"],
     ["sd", "https://slickdeals.net"],
     ["reddit", "https://www.reddit.com"],
-    ["claude", "https://claude.ai/new"]
+    ["claude", "https://claude.ai/new"],
   ],
   "bookmarkRules": [],
   "bookmarkFolderName": "url-porter",
