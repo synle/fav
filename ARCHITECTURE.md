@@ -18,13 +18,13 @@ Static single-page bookmarks launcher at https://synle.github.io/fav/. No backen
 - `url-porter.clean-config.js` — Strips comments from `url-porter.jsonc`, normalizes entries into `[alias, url]` pairs (lowercased alias, `http://` prefix when scheme missing, trailing slashes removed), dedupes, rewrites in place. Preserves optional keys.
 - `build.sh` — Downloads `index.html` + `dev.sh` templates from nav-generator, runs the cleaner. Idempotent.
 - `dev.sh` — curl'd watcher/server script from `synle/workflows`; watches `*.json *.scss *.jsx *.js`, runs `npm start`.
-- `.github/workflows/` — Local build pipeline and a reusable PR artifact cleanup workflow.
+- `.github/workflows/` — Shared build workflow caller and a reusable PR artifact cleanup workflow.
 
 ## Build & Release
 
 1. `npm ci` — installs oxfmt (formatter) + oxlint (linter), only dev deps.
 2. `npm run build` — regenerates `index.html`, refreshes `dev.sh`, cleans `url-porter.jsonc`.
 
-CI (`build-main.yml`, push/PR to main/master): installs dependencies, builds, formats, and lints. On pushes only, generated changes amend the triggering commit while preserving its author and message, then push with an explicit `--force-with-lease` against the triggering SHA. Full-history checkout preserves ancestry; a newer remote commit rejects the push. PRs build and validate without committing. The workflow does not deploy Pages directly. PR close: artifact cleanup workflow.
+CI (`build-main.yml`, push/PR to main/master): calls the shared `build-and-commit-sh.yml` workflow with `amend-triggering-commit: true` to install dependencies, build, format, and lint. On pushes only, generated changes amend the triggering commit while preserving its author and message, then push with an explicit `--force-with-lease` against the triggering SHA. Full-history checkout preserves ancestry; a newer remote commit rejects the push. PRs build and validate without committing. The workflow does not deploy Pages directly. PR close: artifact cleanup workflow.
 
 Release = merge to main → Pages deploy. `version` in package.json is informational.
