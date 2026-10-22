@@ -12,48 +12,11 @@ concurrency:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
+    uses: synle/workflows/.github/workflows/build-and-commit-sh.yml@main
     permissions:
       contents: write
-    steps:
-      - name: Checkout triggering commit
-        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
-        with:
-          # Amending a shallow checkout can discard the original commit's ancestry.
-          fetch-depth: 0
-          persist-credentials: ${{ github.event_name == 'push' }}
-
-      - name: Setup Node.js
-        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
-        with:
-          node-version: "24.x"
-          cache: npm
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build artifacts
-        run: npm run build
-
-      - name: Format code
-        run: npm run format
-
-      - name: Lint
-        run: npm run lint
-
-      - name: Amend triggering commit
-        if: github.event_name == 'push'
-        shell: bash
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A
-          if git diff --cached --quiet; then
-            echo "No changes to amend"
-            exit 0
-          fi
-          # Preserve the source commit's author and message; replace only its tree.
-          git commit --amend --no-edit
-          # A stale run must never overwrite a newer push, even after a fetch.
-          git push --force-with-lease="$GITHUB_REF:$GITHUB_SHA" origin "HEAD:$GITHUB_REF"
+      pages: write
+      id-token: write
+    with:
+      node-version: "24.x"
+      amend-triggering-commit: true
