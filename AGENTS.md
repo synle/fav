@@ -1,5 +1,11 @@
 # AGENTS.md
 
+## Cross-Agent File Layout
+
+- Store skills in `.agents/skills/<name>/SKILL.md`, not `.claude/skills/`.
+- Use `AGENTS.md` for agent context. When `CLAUDE.md` exists without an `AGENTS.md` in the same directory, rename it to `AGENTS.md`. If both exist, merge their instructions into `AGENTS.md` without losing distinct guidance before removing `CLAUDE.md`.
+- Update references to migrated skill paths and renamed context files.
+
 ## GitHub Raw File URLs
 
 When fetching raw file content from GitHub repos, always use the `?raw=1` blob URL format:
