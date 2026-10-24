@@ -3,6 +3,7 @@ const BASHRC_RAW_BASE_URL = `https://raw.githubusercontent.com/synle/bashrc/refs
 const SITE_SCHEMA = `
   ! Sy's Favorites
   @ 🧑
+  ?tv
 
   # stock
   cnbc | cnbc.com
@@ -40,9 +41,18 @@ const SITE_SCHEMA = `
   plex app | app.plex.tv
   plex local | 192.168.1.22:32400
   netflix | netflix.com
+  apple tv | tv.apple.com
+  crunchyroll | crunchyroll.com
   disney+ | disneyplus.com
   prime video | amazon.com/gp/video
-  crunchyroll | crunchyroll.com
+
+  netflix |tv| netflix.com
+  disney+ |tv| disneyplus.com
+  prime video |tv| primevideo.com
+  youtube |tv| youtube.com
+  apple tv |tv| tv.apple.com
+  crunchyroll |tv| crunchyroll.com
+  plex local |tv| http://192.168.1.45:32400/web/index.html
 
   # UT Austin School
   Canvas | canvas.utexas.edu
