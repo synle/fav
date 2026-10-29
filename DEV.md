@@ -19,3 +19,13 @@ npm ci || npm install --no-fund --prefer-offline
 | `npm run format:check` | Check formatting only                                     |
 | `npm run lint`         | Lint with oxlint                                          |
 | `npm run lint:fix`     | Lint and auto-fix                                         |
+| `npm test`             | Run Vitest once, including inline snapshots               |
+| `npm run test:update`  | Regenerate snapshots intentionally                        |
+
+## Tests
+
+`url-porter.clean-config.test.mjs` runs the cleaner CLI in unique temporary directories, without modifying repository bookmark data. Inline snapshots characterize normalized output and preserved settings.
+
+To refresh only this file, run `npm run test:update -- url-porter.clean-config.test.mjs`. Review the resulting diff before committing; snapshot updates accept current output, not proof of correctness.
+
+Run `npm test && npm run format:check && npm run lint` before committing test changes.
