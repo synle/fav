@@ -10,12 +10,13 @@ const cleanerPath = fileURLToPath(new URL("./url-porter.clean-config.js", import
 /**
  * Executes the cleaner against an isolated fixture and removes its temporary files.
  * @param {string} source Raw JSONC input written to a unique temporary directory.
- * @returns {{status: number | null, stdout: string, stderr: string, output: string}} CLI result and rewritten file contents.
+ * @returns {{status: number | null, stdout: string, stderr: string, output: string, jsonOutput: string}} CLI result and rewritten file contents.
  * @throws {Error} If temporary-file operations or process startup fail.
  */
 function runCleaner(source) {
   const directory = mkdtempSync(join(tmpdir(), "fav-cleaner-"));
   const inputPath = join(directory, "url-porter.jsonc");
+  const jsonPath = join(directory, "url-porter.json");
 
   try {
     writeFileSync(inputPath, source, "utf8");
@@ -31,6 +32,7 @@ function runCleaner(source) {
       stdout: result.stdout,
       stderr: result.stderr,
       output: readFileSync(inputPath, "utf8"),
+      jsonOutput: readFileSync(jsonPath, "utf8"),
     };
   } finally {
     rmSync(directory, { recursive: true, force: true });
@@ -77,7 +79,7 @@ describe("URL Porter cleaner CLI", () => {
         },
         "status": 0,
         "stderr": "",
-        "stdout": "Successfully updated url-porter.jsonc
+        "stdout": "Successfully updated url-porter.jsonc and url-porter.json
       ",
       }
     `);
@@ -113,7 +115,7 @@ describe("URL Porter cleaner CLI", () => {
         },
         "status": 0,
         "stderr": "",
-        "stdout": "Successfully updated url-porter.jsonc
+        "stdout": "Successfully updated url-porter.jsonc and url-porter.json
       ",
       }
     `);
@@ -154,7 +156,7 @@ describe("URL Porter cleaner CLI", () => {
         },
         "status": 0,
         "stderr": "",
-        "stdout": "Successfully updated url-porter.jsonc
+        "stdout": "Successfully updated url-porter.jsonc and url-porter.json
       ",
       }
     `);
@@ -181,7 +183,7 @@ describe("URL Porter cleaner CLI", () => {
         },
         "status": 0,
         "stderr": "",
-        "stdout": "Successfully updated url-porter.jsonc
+        "stdout": "Successfully updated url-porter.jsonc and url-porter.json
       ",
       }
     `);
@@ -190,22 +192,42 @@ describe("URL Porter cleaner CLI", () => {
   test("normalization is idempotent on a second cleaner run", () => {
     const first = runCleaner('{"configs": [["^Go^", "example.com///"]]}');
     const second = runCleaner(first.output);
+    const firstJson = JSON.parse(first.jsonOutput);
+    const secondJson = JSON.parse(second.jsonOutput);
 
     expect(first.status).toBe(0);
     expect(first.stderr).toBe("");
     expect(second.status).toBe(0);
     expect(second.stderr).toBe("");
     expect(second.output).toBe(first.output);
+    expect(firstJson._NOTE).toMatch(/^this file is auto generated, do not edit by hand - /);
+    expect(secondJson._NOTE).toMatch(/^this file is auto generated, do not edit by hand - /);
+    expect({ ...firstJson, _NOTE: undefined }).toEqual({ ...secondJson, _NOTE: undefined });
   });
 
   test("reports malformed JSON without overwriting the input", () => {
     const source = '{ "configs": [';
-    const result = runCleaner(source);
+    const directory = mkdtempSync(join(tmpdir(), "fav-cleaner-"));
+    const inputPath = join(directory, "url-porter.jsonc");
+    const jsonPath = join(directory, "url-porter.json");
 
-    // Characterize the existing CLI: parse errors are logged but still exit zero.
-    expect(result.status).toBe(0);
-    expect(result.stdout).toBe("");
-    expect(result.stderr).toContain("Error processing the JSON file:");
-    expect(result.output).toBe(source);
+    try {
+      writeFileSync(inputPath, source, "utf8");
+      const result = spawnSync(process.execPath, [cleanerPath], {
+        cwd: directory,
+        encoding: "utf8",
+        timeout: 5000,
+      });
+      if (result.error) throw result.error;
+
+      // Characterize the existing CLI: parse errors are logged but still exit zero.
+      expect(result.status).toBe(0);
+      expect(result.stdout).toBe("");
+      expect(result.stderr).toContain("Error processing the JSON file:");
+      expect(readFileSync(inputPath, "utf8")).toBe(source);
+      expect(() => readFileSync(jsonPath, "utf8")).toThrow();
+    } finally {
+      rmSync(directory, { recursive: true, force: true });
+    }
   });
 });

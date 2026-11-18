@@ -108,8 +108,37 @@ try {
     result.statsLookbackMonths = parsedData.statsLookbackMonths;
   }
 
-  fs.writeFileSync(OUTPUT_FILE, JSON.stringify(result, null, 2), "utf8");
-  console.log(`Successfully updated ${OUTPUT_FILE}`);
+  function formatJsonc(obj) {
+    const indent = "  ";
+    const lines = ["{"];
+    const keys = Object.keys(obj);
+    keys.forEach((key, idx) => {
+      const comma = idx === keys.length - 1 ? "" : ",";
+      if (key === "configs" && Array.isArray(obj.configs)) {
+        lines.push(`${indent}"configs": [`);
+        obj.configs.forEach((pair, i) => {
+          const pairComma = i === obj.configs.length - 1 ? "" : ",";
+          lines.push(`${indent}${indent}${JSON.stringify(pair)}${pairComma}`);
+        });
+        lines.push(`${indent}]${comma}`);
+      } else {
+        lines.push(`${indent}${JSON.stringify(key)}: ${JSON.stringify(obj[key])}${comma}`);
+      }
+    });
+    lines.push("}");
+    return lines.join("\n") + "\n";
+  }
+
+  const jsoncOutput = formatJsonc(result);
+  const jsonResult = {
+    _NOTE: `this file is auto generated, do not edit by hand - ${new Date().toISOString()}`,
+    ...result,
+  };
+  const jsonOutput = JSON.stringify(jsonResult, null, 2) + "\n";
+
+  fs.writeFileSync(OUTPUT_FILE, jsoncOutput, "utf8");
+  fs.writeFileSync("url-porter.json", jsonOutput, "utf8");
+  console.log(`Successfully updated ${OUTPUT_FILE} and url-porter.json`);
 } catch (error) {
   console.error("Error processing the JSON file:", error.message);
 }
