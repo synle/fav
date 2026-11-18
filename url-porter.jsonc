@@ -60,6 +60,7 @@
     ["sd", "https://slickdeals.net"],
     ["reddit", "https://www.reddit.com"],
     ["claude", "https://claude.ai/new"],
+    ["finance", "https://www.google.com/finance"],
   ],
   "bookmarkRules": [],
   "bookmarkFolderName": "url-porter",
