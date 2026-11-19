@@ -41,7 +41,7 @@ function runCleaner(source) {
 
 describe("URL Porter cleaner CLI", () => {
   test("normalizes JSONC aliases and URLs while removing duplicate pairs", () => {
-    const result = runCleaner(`{
+    const { jsonOutput, ...result } = runCleaner(`{
       // Preserve the supplied homepage rather than applying the default.
       "homepage": "https://home.example/",
       "configs": [
@@ -86,7 +86,7 @@ describe("URL Porter cleaner CLI", () => {
   });
 
   test("accepts bare arrays and retains empty values", () => {
-    const result = runCleaner(`[
+    const { jsonOutput, ...result } = runCleaner(`[
       ["", ""],
       ["", ""],
       {},
@@ -122,7 +122,7 @@ describe("URL Porter cleaner CLI", () => {
   });
 
   test("preserves supported optional settings and trims the folder name", () => {
-    const result = runCleaner(`{
+    const { jsonOutput, ...result } = runCleaner(`{
       "configs": [],
       "bookmarkRules": [{"pattern": "docs", "folder": "Reference"}],
       "bookmarkFolderName": "  Favorites  ",
@@ -163,7 +163,7 @@ describe("URL Porter cleaner CLI", () => {
   });
 
   test("omits invalid optional settings and defaults missing configs", () => {
-    const result = runCleaner(`{
+    const { jsonOutput, ...result } = runCleaner(`{
       "homepage": "",
       "bookmarkRules": {},
       "bookmarkFolderName": "   ",
