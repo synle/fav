@@ -1,6 +1,6 @@
 # DONE.eslint — lint suppressions inventory (oxlint)
 
-Status: **resolved** — `npm run lint` (oxlint 1.79.0) exits 0 with **zero suppressions and zero config files**. Every item from the original TODO list is addressed below; nothing left for a follow-up agent except the one declined item at the bottom.
+Status: **resolved** — `npm run lint` (oxlint 1.79.0) exits 0 with **zero warnings, zero suppressions, and zero config files**. Every item from the original TODO list is addressed below; nothing left for a follow-up agent except the one declined item at the bottom.
 
 ## Resolved items
 
@@ -32,6 +32,10 @@ Addressing the old `catch {}` inside `_getPassword` surfaced an actual defect:
 
 - `_getRandomOption(choices)` used inclusive upper bound `choices.length`, so it could index out of bounds and return `""`. Appending `""` never grows the password → the growth loop could spin forever (~1/(len+1) odds per iteration). The surrounding `try/catch` was dead (nothing throws) and masked the smell.
 - Fix: exclusive bound via `choices.length - 1`, `try/catch` deleted. Verified: 500/500 generated passwords ≥ 20 chars, mixed alphanumeric/special modes, no hangs.
+
+### 4. `no-unused-vars` on `duplicatesRemoved` — FIXED, dead code removed
+
+`url-porter.clean-config.js` still computed `duplicatesRemoved` after commit 1aad452 removed the log that consumed it. oxlint reported `no-unused-vars` as a warning on every lint run. The variable is deleted; deduplication behavior and its tests are unchanged.
 
 ## Declined (with reason)
 

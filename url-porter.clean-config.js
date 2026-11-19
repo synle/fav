@@ -75,8 +75,6 @@ try {
     return true;
   });
 
-  const duplicatesRemoved = transformedConfigs.length - dedupedConfigs.length;
-
   const result = {
     homepage: parsedData.homepage || DEFAULT_HOME_PAGE,
     configs: dedupedConfigs,
